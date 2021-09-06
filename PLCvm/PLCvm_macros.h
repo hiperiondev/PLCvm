@@ -23,15 +23,15 @@
 #ifndef PLCVM_MACROS_H_
 #define PLCVM_MACROS_H_
 
-#define OP(x)       (x & 0xe000)                                     // operand
-#define ARG_OP(x)   (x & 0x1fff)                                     // argument of operand
-#define ARG_LIT(x)  (x & 0x7fff)                                     // literal
+#define       OP(x) (x & 0xe000)                                     // operand
+#define   ARG_OP(x) (x & 0x1fff)                                     // argument of operand
+#define  ARG_LIT(x) (x & 0x7fff)                                     // literal
 
-#define ALU_OP(x)   ((x >> 8) & 0x1F)                                // alu operation
-#define ALU_DS(x)   (x & 0x03)                                       // alu data stack
-#define ALU_RS(x)   ((x >> 2) & 0x03)                                // alu return stack
-#define ALU_EX(x)   ((ALU_DS(x) == 0x03)|((ALU_RS(x) == 0x03) << 1)) // extended bits
-#define ALU_ARG(x)  ((x & 0xFF))                                     // arguments of alu
-#define VAR_TYPE(x) ((x & F800) >> 11)                               // variable type
+#define   ALU_OP(x) ((x >> 8) & 0x1F)                                // alu operation
+#define   ALU_DS(x) (x & 0x03)                                       // alu data stack
+#define   ALU_RS(x) ((x >> 2) & 0x03)                                // alu return stack
+#define   ALU_EX(x) ((ALU_DS(x) == 0x03)|((ALU_RS(x) == 0x03) << 1)) // extended bits
+#define  ALU_ARG(x) ((x & 0xFF))                                     // arguments of alu
+#define VAR_TYPE(x) ((x & 0xF800) >> 11)                             // variable type
 
 #endif /* PLCVM_MACROS_H_ */

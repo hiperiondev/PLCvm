@@ -241,29 +241,32 @@ enum vm_status {
 
 // IEC 61131-3 data types
 enum vm_vartypes {
-    VT_EMPTY,   //
-    VT_BOOL,    //
-    VT_SINT,    //
-    VT_INT,     //
-    VT_DINT,    //
-    VT_LINT,    //
-    VT_USINT,   //
-    VT_UINT,    //
-    VT_UDINT,   //
-    VT_ULINT,   //
-    VT_REAL,    //
-    VT_LREAL,   //
-    VT_TIME,    //
-    VT_DATE,    //
-    VT_TOD,     //
-    VT_DT,      //
-    VT_STRING,  // n: length
-    VT_BYTE,    //
-    VT_WORD,    //
-    VT_DWORD,   //
-    VT_LWORD,   //
-    VT_WSTRING, // n: length
-    VT_SE,      // single-element variables n: [aaaa bbbb 000p pttt] a,b: hierarchical address p:(00=I, 01=Q, 10=M) t:(000=X/None, 001=B, 010=W, 011=D, 100=L)
+    VT_EMPTY   = 0x01,  //
+    VT_BOOL    = 0x02,  //
+    VT_SINT    = 0x03,  //
+    VT_INT     = 0x04,  //
+    VT_DINT    = 0x05,  //
+    VT_LINT    = 0x06,  //
+    VT_USINT   = 0x07,  //
+    VT_UINT    = 0x08,  //
+    VT_UDINT   = 0x09,  //
+    VT_ULINT   = 0x0a,  //
+    VT_REAL    = 0x0b,  //
+    VT_LREAL   = 0x0c,  //
+    VT_TIME    = 0x0d,  //
+    VT_DATE    = 0x0e,  //
+    VT_TOD     = 0x0f,  //
+    VT_LTOD    = 0x10,  //
+    VT_DT      = 0x11,  //
+    VL_LDT     = 0x12,  //
+    VT_STRING  = 0x13,  // n: length
+    VT_BYTE    = 0x14,  //
+    VT_WORD    = 0x15,  //
+    VT_DWORD   = 0x16,  //
+    VT_LWORD   = 0x17,  //
+    VT_WSTRING = 0x18,  // n: length
+    VT_CHAR    = 0x19,  //
+    VT_SE      = 0x1a,  // single-element variables n: [aaaa bbbb 000p pttt] a,b: hierarchical address p:(00=I, 01=Q, 10=M) t:(000=X/None, 001=B, 010=W, 011=D, 100=L)
 
 };
 
