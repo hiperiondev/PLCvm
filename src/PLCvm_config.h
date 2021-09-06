@@ -36,5 +36,4 @@
 #define RAM_SIZE  65535
 #define EXT_FUNC  1
 
-
 #endif /* PLCVM_CONFIG_H_ */

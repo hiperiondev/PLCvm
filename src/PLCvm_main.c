@@ -32,6 +32,7 @@
 #include "PLCvm_assembler.h"
 #include "PLCvm_disassembler.h"
 
+///////////////////////////////// memory functions //////////////////////////////////
 uint8_t plcvm_mem_put(uint16_t addr, uint16_t value, vm_t* vm) {
     vm->RAM[addr] = value;
     return RC_OK;
@@ -42,7 +43,6 @@ uint16_t plcvm_mem_get(uint16_t addr, vm_t* vm) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-
 int kbhit(void) {
     struct termios oldt, newt;
     int ch;
@@ -68,7 +68,6 @@ int kbhit(void) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-
 int main(int argc, char **argv) {
     uint8_t result;
     vm_t *vm = PLCvm_init(RAM_SIZE, RS_SIZE, DS_SIZE, REG_SIZE);

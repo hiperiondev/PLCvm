@@ -142,6 +142,11 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
             break;
         }
 
+        case VT_LDATE: {
+            vm->hp[varp].var = (int64_t*) calloc(1, sizeof(int64_t));
+            break;
+        }
+
         case VT_TOD: {
             vm->hp[varp].var = (tod_t*) calloc(1, sizeof(tod_t));
             break;
@@ -159,23 +164,25 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
             break;
         }
 
-        case VT_LDT: { // TODO: implement
+        case VT_LDT: {
+            vm->hp[varp].var = (int64_t*) calloc(1, sizeof(int64_t));
             break;
         }
 
         case VT_STRING: {
-            vm->hp[varp].var = (char*) calloc(1, (sizeof(char) * (*n)) + 1);
+            vm->hp[varp].var = (char*) calloc((*n) + 1, sizeof(char));
             vm->dp--;
             break;
         }
 
         case VT_WSTRING: {
-            vm->hp[varp].var = (char*) calloc(1, (sizeof(char) * (*n) * 2) + 1);
+            vm->hp[varp].var = (char*) calloc((*n) * 2 + 1, sizeof(char));
             vm->dp--;
             break;
         }
 
-        case VT_CHAR: { // TODO: implement
+        case VT_CHAR: {
+            vm->hp[varp].var = (uint8_t*) calloc(1, sizeof(uint8_t));
             break;
         }
 

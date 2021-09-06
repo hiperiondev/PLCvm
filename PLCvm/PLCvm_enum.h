@@ -255,18 +255,19 @@ enum vm_vartypes {
     VT_LREAL   = 0x0c,  //
     VT_TIME    = 0x0d,  //
     VT_DATE    = 0x0e,  //
-    VT_TOD     = 0x0f,  //
-    VT_LTOD    = 0x10,  //
-    VT_DT      = 0x11,  //
-    VT_LDT     = 0x12,  //
-    VT_STRING  = 0x13,  // n: length
-    VT_BYTE    = 0x14,  //
-    VT_WORD    = 0x15,  //
-    VT_DWORD   = 0x16,  //
-    VT_LWORD   = 0x17,  //
-    VT_WSTRING = 0x18,  // n: length
-    VT_CHAR    = 0x19,  //
-    VT_SE      = 0x1a,  // single-element variables n: [aaaa bbbb 000p pttt] a,b: hierarchical address p:(00=I, 01=Q, 10=M) t:(000=X/None, 001=B, 010=W, 011=D, 100=L)
+    VT_LDATE   = 0x0f,  //
+    VT_TOD     = 0x10,  //
+    VT_LTOD    = 0x11,  //
+    VT_DT      = 0x12,  //
+    VT_LDT     = 0x13,  //
+    VT_STRING  = 0x14,  // n: length
+    VT_BYTE    = 0x15,  //
+    VT_WORD    = 0x16,  //
+    VT_DWORD   = 0x17,  //
+    VT_LWORD   = 0x18,  //
+    VT_WSTRING = 0x19,  // n: length
+    VT_CHAR    = 0x1a,  //
+    VT_SE      = 0x1b,  // single-element variables n: [aaaa bbbb 000p pttt] a,b: hierarchical address p:(00=I, 01=Q, 10=M) t:(000=X/None, 001=B, 010=W, 011=D, 100=L)
 
 };
 
