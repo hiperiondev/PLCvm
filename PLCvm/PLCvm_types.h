@@ -27,6 +27,7 @@
 typedef struct {
     uint8_t type;  // variable type
        void *var;  // pointer to malloc
+   uint64_t len;   // length
 } var_t;
 
 typedef union {
@@ -49,8 +50,11 @@ typedef union {
 } tod_t;
 
 typedef struct {
-     tod_t tod;
-    date_t date;
+    struct {
+        tod_t tod;
+        date_t date;
+    } dat;
+    uint64_t dw_dat;
 } dat_t;
 
 // Registers

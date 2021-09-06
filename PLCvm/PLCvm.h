@@ -312,7 +312,8 @@ static inline uint8_t PLCvm_step(uint16_t word, vm_t *vm) {
         return RC_RS_UNDER_FLOW;
     }
 #endif
-    exitvm: return return_status;
+    //exitvm:
+    return return_status;
 }
 
 #endif /* __PLCVM_H__ */

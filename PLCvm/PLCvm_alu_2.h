@@ -95,6 +95,7 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
             break;
         }
 
+
         case VT_USINT:
         case VT_BYTE: {
             vm->hp[varp].var = (uint8_t*) calloc(1, sizeof(uint8_t));
@@ -158,9 +159,9 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
         case VT_DT: {
             vm->hp[varp].var = (dat_t*) calloc(1, sizeof(dat_t));
-            ((dat_t*) vm->hp[varp].var)->date.date.day = 1;
-            ((dat_t*) vm->hp[varp].var)->date.date.month = 1;
-            ((dat_t*) vm->hp[varp].var)->date.date.year = 1;
+            ((dat_t*) vm->hp[varp].var)->dat.date.date.day = 1;
+            ((dat_t*) vm->hp[varp].var)->dat.date.date.month = 1;
+            ((dat_t*) vm->hp[varp].var)->dat.date.date.year = 1;
             break;
         }
 
@@ -216,6 +217,87 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_VARSVR) ");
 #endif
+    uint8_t pop = 0;
+
+    if (vm->hp[*t].type == 0)
+        return RC_NO_VAR;
+
+    switch (VAR_TYPE(*t)) {
+        // max 16 bits
+        case VT_BOOL:
+        case VT_SINT:
+        case VT_INT:
+        case VT_USINT:
+        case VT_UINT:
+        case VT_BYTE:
+        case VT_WORD:
+        case VT_CHAR: {
+            *((uint16_t*) vm->hp[*t].var) = *n;
+            pop = 1;
+            break;
+        }
+
+        // 32 bits
+        case VT_TOD:
+        case VT_TIME:
+        case VT_DATE:
+        case VT_REAL:
+        case VT_UDINT:
+        case VT_DINT:
+        case VT_DWORD: {
+            *((uint32_t*) vm->hp[*t].var) = ((uint32_t)vm->ds[vm->dp - 1] << 16) | ((uint32_t)vm->ds[vm->dp - 2]);
+            pop = 2;
+            break;
+        }
+
+        // 64 bits
+        case VT_DT:
+        case VT_LDT:
+        case VT_LTOD:
+        case VT_LDATE:
+        case VT_LINT:
+        case VT_LREAL:
+        case VT_ULINT:
+        case VT_LWORD: {
+            *((uint64_t*) vm->hp[*t].var) = (((uint64_t)vm->ds[vm->dp - 1]) << 48) | ((uint64_t)vm->ds[vm->dp - 2] << 32) | ((uint64_t)vm->ds[vm->dp - 3] << 16) | ((uint64_t)vm->ds[vm->dp - 4]);
+            pop = 4;
+            break;
+        }
+
+        case VT_STRING: {
+            if (*n > vm->hp[*t].len)
+                return RC_VAR_OOR;
+
+            uint64_t cnt;
+            for (cnt = 0; cnt < *n; cnt++) {
+                ((char*) vm->hp[*t].var)[cnt] = vm->ds[vm->dp - 2 - cnt];
+            }
+
+            pop = *n + 1;
+            break;
+        }
+
+        case VT_WSTRING: {
+            if ((*n * 2) > vm->hp[*t].len)
+                return RC_VAR_OOR;
+
+            uint64_t cnt;
+            for (cnt = 0; cnt < (*n * 2); cnt += 2) {
+                ((char*) vm->hp[*t].var)[cnt] = vm->ds[vm->dp - 2 - cnt];
+                ((char*) vm->hp[*t].var)[cnt + 1] = vm->ds[vm->dp - 2 - cnt + 1];
+            }
+
+            pop = (*n * 2) + 1;
+            break;
+            break;
+        }
+
+        case VT_SE: {
+            break;
+        }
+    }
+
+    vm->dp-= pop;
     return RC_OK;
 }
 
