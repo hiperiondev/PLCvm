@@ -258,7 +258,7 @@ enum vm_vartypes {
     VT_TOD     = 0x0f,  //
     VT_LTOD    = 0x10,  //
     VT_DT      = 0x11,  //
-    VL_LDT     = 0x12,  //
+    VT_LDT     = 0x12,  //
     VT_STRING  = 0x13,  // n: length
     VT_BYTE    = 0x14,  //
     VT_WORD    = 0x15,  //

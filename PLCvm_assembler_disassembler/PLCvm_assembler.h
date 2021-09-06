@@ -34,7 +34,6 @@
 #include "PLCvm_assdis_common.h"
 
 /////////////////////////////////////////////////////////////////////////////////////
-
 const uint8_t VMFLAGS_POS[] = {
         ALU_F_T2N,
         ALU_F_T2R,
@@ -63,12 +62,10 @@ jwHashTable *label = NULL;
 jwHashTable *macro = NULL;
 
 /////////////////////////////////////////////////////////////////////////////////////
-
      int plcvm_assembleFile(char* fileIn, char* fileOut);
 uint16_t plcvm_assembleLine(char* line, bool pass);
 
 /////////////////////////////////////////////////////////////////////////////////////
-
 int opCmp(char *op, char *value){
     return strcmp(strlwr(op), value);
 }
@@ -227,7 +224,6 @@ int directives(char* line, char* fileOut, bool pass) {
 }
 
 //////////////////////////////////////////////////////////////
-
 uint16_t plcvm_assembleLine(char* line, bool pass) {
       int words, value, w;
      char *hresult = NULL;
