@@ -23,8 +23,8 @@
 #ifndef __PLCVM_DISASSEMBLER_H__
 #define __PLCVM_DISASSEMBLER_H__
 
-#include "PLCvm.h"
-#include "PLCvm_assdis_common.h"
+#include "plcvm.h"
+#include "plcvm_assdis_common.h"
 
 char* plcvm_disassembly(uint16_t word) {
     static char dis[100];

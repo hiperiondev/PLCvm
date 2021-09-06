@@ -30,8 +30,9 @@
 #include <stdbool.h>
 
 #include "jwHash.h"
-#include "PLCvm.h"
-#include "PLCvm_assdis_common.h"
+#include "plcvm.h"
+#include "plcvm_assdis_common.h"
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 const uint8_t VMFLAGS_POS[] = {

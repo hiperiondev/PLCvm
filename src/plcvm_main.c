@@ -27,10 +27,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "PLCvm_config.h"
-#include "PLCvm.h"
-#include "PLCvm_assembler.h"
-#include "PLCvm_disassembler.h"
+#include "plcvm_config.h"
+#include "plcvm.h"
+#include "plcvm_assembler.h"
+#include "plcvm_disassembler.h"
 
 ///////////////////////////////// memory functions //////////////////////////////////
 uint8_t plcvm_mem_put(uint16_t addr, uint16_t value, vm_t* vm) {

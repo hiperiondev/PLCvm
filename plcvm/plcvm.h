@@ -23,17 +23,17 @@
 #ifndef __PLCVM_H__
 #define __PLCVM_H__
 
-#include <inttypes.h>
 #include <stdbool.h>
+#include <inttypes.h>
 
-#include "PLCvm_macros.h"
-#include "PLCvm_enum.h"
-#include "PLCvm_types.h"
-#include "PLCvm_fn.h"
-#include "PLCvm_alu_0.h"
-#include "PLCvm_alu_1.h"
-#include "PLCvm_alu_2.h"
-#include "PLCvm_alu_3.h"
+#include "plcvm_macros.h"
+#include "plcvm_enum.h"
+#include "plcvm_types.h"
+#include "plcvm_alu_0.h"
+#include "plcvm_alu_1.h"
+#include "plcvm_alu_2.h"
+#include "plcvm_alu_3.h"
+#include "plcvm_fn.h"
 
 /////////////////////////////////////////////////////////////////////////////////////
 #ifdef DEBUG

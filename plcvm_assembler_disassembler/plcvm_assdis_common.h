@@ -26,7 +26,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "PLCvm_assdis_common.h"
+#include "plcvm_assdis_common.h"
 
 #define EP(x) [x] = #x  // enum print
 
