@@ -97,7 +97,6 @@ uint8_t (*alu_fn[])(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t 
 
     fnc_alu_varcvr,
     fnc_alu_varsvr,
-    fnc_alu_vargvr,
     fnc_alu_selmux,
     fnc_alu_cmpgrt,
     fnc_alu_cmpgeq,
@@ -123,6 +122,7 @@ uint8_t (*alu_fn[])(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t 
     fnc_alu_enmmux,
     fnc_alu_enmequ,
     fnc_alu_enmneq,
+    fnc_alu_ex2_nop,
     fnc_alu_ex2_nop,
     fnc_alu_ex2_nop,
     fnc_alu_ex2_nop,
