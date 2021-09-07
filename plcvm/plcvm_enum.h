@@ -77,9 +77,9 @@ enum alu_op {
 };
 
 enum alu_ex_1 { // can't use DSTACK
-    // type conversion function
-    ALU_OP_CNVTOT = 0x00, // convert to type (INT_TO_REAL, WORD_BCD_TO_INT, INT_TO_BCD_WORD, DT_TO_TOD, DT_TO_DATE)
-    ALU_OP_CNVTRC = 0x01, // TRUNC []
+    // variable functions
+    ALU_OP_VARCVR = 0x00, // create variable t:type, n:len (used on not fixed types ex: STRING). return t:pointer var [tttttppppppppppp]; type: [0000 0000 0prt tttt] t: type, r:retain p:persistent
+    ALU_OP_VARSVR = 0x01, // set variable t:pointer var, n[+]: depend on type
     // standard functions of one numeric variable
     ALU_OP_NUMABS = 0x02, // ABS []
     ALU_OP_NUMSQR = 0x03, // SQRT []
@@ -118,42 +118,42 @@ enum alu_ex_1 { // can't use DSTACK
 };
 
 enum alu_ex_2 { // can't use RSTACK
-    // variable functions
-    ALU_OP_VARCVR = 0x00, // create variable t:type, n:len (used on not fixed types ex: STRING). return t:pointer var; type: [0000 0000 0prt tttt] t: type, r:retain p:persistent
-    ALU_OP_VARSVR = 0x01, // set variable t:pointer var, n[+]: depend on type
-    ALU_OP_VARGVR = 0x02, // get variable t:pointer var return t:var [tttttppppppppppp]
+    // type conversion function
+    ALU_OP_CNVTOT = 0x00, // convert to type (INT_TO_REAL, WORD_BCD_TO_INT, INT_TO_BCD_WORD, DT_TO_TOD, DT_TO_DATE)
+    ALU_OP_CNVTRC = 0x01, // TRUNC []
     // standard selection functions
-    ALU_OP_SELMUX = 0x03, // MUX []
+    ALU_OP_SELMUX = 0x02, // MUX []
     // standard comparison functions
-    ALU_OP_CMPGRT = 0x04, // GT []
-    ALU_OP_CMPGEQ = 0x05, // GE []
-    ALU_OP_CMPEQU = 0x06, // EQ []
-    ALU_OP_CMPLES = 0x07, // LE []
-    ALU_OP_CMPLTH = 0x08, // LT []
-    ALU_OP_CMPNEQ = 0x09, // NE []
+    ALU_OP_CMPGRT = 0x03, // GT []
+    ALU_OP_CMPGEQ = 0x04, // GE []
+    ALU_OP_CMPEQU = 0x05, // EQ []
+    ALU_OP_CMPLES = 0x06, // LE []
+    ALU_OP_CMPLTH = 0x07, // LT []
+    ALU_OP_CMPNEQ = 0x08, // NE []
     // character string functions
-    ALU_OP_STRLEN = 0x0a, // LEN []
-    ALU_OP_STRLFT = 0x0b, // LEFT []
-    ALU_OP_STRRGH = 0x0c, // RIGHT []
-    ALU_OP_STRMID = 0x0d, // MID []
-    ALU_OP_STRCNC = 0x0e, // CONCAT []
-    ALU_OP_STRINS = 0x0f, // INSERT []
-    ALU_OP_STRDEL = 0x10, // DELETE []
+    ALU_OP_STRLEN = 0x09, // LEN []
+    ALU_OP_STRLFT = 0x0a, // LEFT []
+    ALU_OP_STRRGH = 0x0b, // RIGHT []
+    ALU_OP_STRMID = 0x0c, // MID []
+    ALU_OP_STRCNC = 0x0d, // CONCAT []
+    ALU_OP_STRINS = 0x0e, // INSERT []
+    ALU_OP_STRDEL = 0x1f, // DELETE []
     // standard character string functions
-    ALU_OP_CHRRPL = 0x11, // REPLACE []
-    ALU_OP_CHRFND = 0x12, // FIND []
+    ALU_OP_CHRRPL = 0x10, // REPLACE []
+    ALU_OP_CHRFND = 0x11, // FIND []
     // functions of time data types
-    ALU_OP_TIMADD = 0x13, // ADD []
-    ALU_OP_TIMSUM = 0x14, // SUB []
-    ALU_OP_TIMMUL = 0x15, // MUL []
-    ALU_OP_TIMDIV = 0x16, // DIV []
-    ALU_OP_TIMCNC = 0x17, // CONCAT_DATE_TOD []
+    ALU_OP_TIMADD = 0x12, // ADD []
+    ALU_OP_TIMSUM = 0x13, // SUB []
+    ALU_OP_TIMMUL = 0x14, // MUL []
+    ALU_OP_TIMDIV = 0x15, // DIV []
+    ALU_OP_TIMCNC = 0x16, // CONCAT_DATE_TOD []
     // functions of enumerated data types
-    ALU_OP_ENMSEL = 0x18, // SEL []
-    ALU_OP_ENMMUX = 0x19, // MUX []
-    ALU_OP_ENMEQU = 0x1a, // EQ []
-    ALU_OP_ENMNEQ = 0x1b, // NE []
+    ALU_OP_ENMSEL = 0x17, // SEL []
+    ALU_OP_ENMMUX = 0x18, // MUX []
+    ALU_OP_ENMEQU = 0x19, // EQ []
+    ALU_OP_ENMNEQ = 0x1a, // NE []
     // not implemented
+    ALU_OP_EX2_027 = 0x1b, //
     ALU_OP_EX2_028 = 0x1c, //
     ALU_OP_EX2_029 = 0x1d, //
     ALU_OP_EX2_030 = 0x1e, //
