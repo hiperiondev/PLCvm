@@ -23,11 +23,5 @@
 #ifndef PLCVM_ALU_3_H_
 #define PLCVM_ALU_3_H_
 
-uint8_t fnc_alu_ex3_nop(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
-#ifdef DEBUG
-    DBG_PRINT("ALU_OP_EX3_NOP) ");
-#endif
-    return RC_OK;
-}
 
 #endif /* PLCVM_ALU_3_H_ */

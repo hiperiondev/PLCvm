@@ -61,6 +61,10 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_NO_VAR_SPC;
 
     tmp = 1;
+
+    if (vm->hp[varp].var != NULL)
+        free(vm->hp[varp].var);
+
     switch (*t & 0x1f) {
         case VT_EMPTY: {
             free(vm->hp[varp].var);
@@ -271,7 +275,7 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
             for (cnt = 0; cnt < *n; cnt++) {
                 ((char*) vm->hp[*t].var)[cnt] = vm->ds[vm->dp - 2 - cnt];
             }
-
+            vm->hp[*t].len = *n;
             pop = *n + 1;
             break;
         }
@@ -285,7 +289,7 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
                 ((char*) vm->hp[*t].var)[cnt] = vm->ds[vm->dp - 2 - cnt];
                 ((char*) vm->hp[*t].var)[cnt + 1] = vm->ds[vm->dp - 2 - cnt + 1];
             }
-
+            vm->hp[*t].len = *n;
             pop = (*n * 2) + 1;
             break;
             break;
@@ -538,6 +542,8 @@ uint8_t fnc_alu_sellmt(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_SELLMT) ");
 #endif
     return RC_OK;
+
+
 }
 
 #endif /* PLCVM_ALU_1_H_ */

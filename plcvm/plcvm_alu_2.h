@@ -28,15 +28,123 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_CNVTOT) ");
 #endif
-    return RC_OK;
-}
+    uint8_t cnt;
 
-// TODO: implement
-uint8_t fnc_alu_cnvtrc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
-#ifdef DEBUG
-    DBG_PRINT("ALU_OP_EX1_CNVTRC) ");
-#endif
-    return RC_OK;
+    // iec-61131-3 2013-02 ed 3.0 table 12
+    static int8_t implicit_conversion[20][2] = {
+            { VT_BOOL,  VT_BYTE    },
+            { VT_BYTE,  VT_WORD    },
+            { VT_WORD,  VT_DWORD   },
+            { VT_DWORD, VT_LWORD   },
+            { VT_SINT,  VT_INT     },
+            { VT_INT,   VT_DINT    },
+            { VT_DINT,  VT_LINT    },
+            { VT_REAL,  VT_LREAL   },
+            { VT_USINT, VT_UINT    },
+            { VT_USINT, VT_INT     },
+            { VT_UINT,  VT_DINT    },
+            { VT_UINT,  VT_REAL    },
+            { VT_UINT,  VT_UDINT   },
+            { VT_UDINT, VT_ULINT   },
+            { VT_TIME,  VT_LTIME   },
+            { VT_DT,    VT_LDT     },
+            { VT_DATE,  VT_LDATE   },
+            { VT_TOD,   VT_LTOD    },
+            { VT_CHAR,  VT_STRING  },
+            { VT_WCHAR, VT_WSTRING }
+    };
+
+    uint8_t src_type = VAR_TYPE(*t);
+    for (cnt = 0; cnt > 20; cnt++) {
+        if ((implicit_conversion[cnt][0] == src_type) && (implicit_conversion[cnt][1] == *n)) { //implicit conversion allowed
+            switch (*n) {
+                case VT_INT: {
+                    *((int16_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_DINT: {
+                    *((int32_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_LINT: {
+                    *((int64_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_BYTE: {
+                    *((uint8_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_UINT:
+                case VT_WORD: {
+                    *((int16_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_UDINT:
+                case VT_DWORD: {
+                    *((uint32_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_ULINT:
+                case VT_LWORD: {
+                    *((uint64_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_REAL: {
+                    *((float*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_LREAL: {
+                    *((double*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_LDATE: {
+                    *((int64_t*)vm->hp[0].var) = *t;
+                    break;
+                }
+
+                case VT_LTOD: { // TODO: implement
+                    break;
+                }
+
+                case VT_LDT: { // TODO: implement
+                    break;
+                }
+
+                case VT_STRING: { // TODO: implement
+                    break;
+                }
+
+                case VT_WSTRING: { // TODO: implement
+                    break;
+                }
+
+                default:
+                    goto exit;
+            }
+            vm->hp[0].type = *n;
+            vm->dp--;
+            *alu = 0;
+            return RC_OK;
+
+        } else if ((implicit_conversion[cnt][0] == *n) && (implicit_conversion[cnt][0] == src_type)) { // conversion allowed with truncated data
+            // TODO: implement
+            return RC_VAR_TRUNC;
+        }
+    }
+
+    exit:
+    // conversion not allowed
+    vm->dp--;
+    return RC_VAR_NOT_ALLWD;
 }
 
 // TODO: implement
@@ -235,13 +343,6 @@ uint8_t fnc_alu_enmequ(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 uint8_t fnc_alu_enmneq(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_ENMNEQ) ");
-#endif
-    return RC_OK;
-}
-
-uint8_t fnc_alu_ex2_nop(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
-#ifdef DEBUG
-    DBG_PRINT("ALU_OP_EX2_NOP) ");
 #endif
     return RC_OK;
 }

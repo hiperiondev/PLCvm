@@ -137,8 +137,8 @@ const char *ALU[] = {
 };
 
 const char *ALU_EX1[] = {
-    EP(ALU_OP_CNVTOT),
-    EP(ALU_OP_CNVTRC),
+    EP(ALU_OP_VARCVR),
+    EP(ALU_OP_VARSVR),
     EP(ALU_OP_NUMABS),
     EP(ALU_OP_NUMSQR),
     EP(ALU_OP_NUMLON),
@@ -172,8 +172,8 @@ const char *ALU_EX1[] = {
 };
 
 const char *ALU_EX2[] = {
-    EP(ALU_OP_VARCVR),
-    EP(ALU_OP_VARSVR),
+    EP(ALU_OP_CNVTOT),
+    EP(ALU_OP_EX2NOP),
     EP(ALU_OP_SELMUX),
     EP(ALU_OP_CMPGRT),
     EP(ALU_OP_CMPGEQ),

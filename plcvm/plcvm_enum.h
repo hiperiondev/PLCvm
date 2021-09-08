@@ -40,7 +40,7 @@ enum vm_aluflgs {
     ALU_F_R2P = 0x10   // move R to PC
 };
 
-enum alu_op {
+enum alu_0 {
     // standard ALU operations
     ALU_OP_ALUTOP = 0x00, // t
     ALU_OP_ALUSCN = 0x01, // n
@@ -119,8 +119,8 @@ enum alu_ex_1 { // can't use DSTACK
 
 enum alu_ex_2 { // can't use RSTACK
     // type conversion function
-    ALU_OP_CNVTOT = 0x00, // convert to type (INT_TO_REAL, WORD_BCD_TO_INT, INT_TO_BCD_WORD, DT_TO_TOD, DT_TO_DATE)
-    ALU_OP_CNVTRC = 0x01, // TRUNC []
+    ALU_OP_CNVTOT = 0x00, // convert to type t: variable, n: target type, return: acc
+    ALU_OP_EX2NOP = 0x01, // TRUNC []
     // standard selection functions
     ALU_OP_SELMUX = 0x02, // MUX []
     // standard comparison functions
@@ -215,6 +215,7 @@ enum vm_return {
     RC_NO_VAR        = 0x0e, // no allocated variable
     RC_VAR_TRUNC     = 0x0f, // result function on variable are truncated
     RC_VAR_OOR       = 0x10, // variable out of range (ex: string too long)
+    RC_VAR_NOT_ALLWD = 0x11, // variable operation not allowed
     ///////////////////////////
     RC_EXPTN         = 0xfd, // alu exception
     RC_ERROR         = 0xfe, // generic error
@@ -256,20 +257,22 @@ enum vm_vartypes {
     VT_REAL    = 0x0a,  //
     VT_LREAL   = 0x0b,  //
     VT_TIME    = 0x0c,  //
-    VT_DATE    = 0x0d,  //
-    VT_LDATE   = 0x0e,  //
-    VT_TOD     = 0x0f,  //
-    VT_LTOD    = 0x10,  //
-    VT_DT      = 0x11,  //
-    VT_LDT     = 0x12,  //
-    VT_STRING  = 0x13,  // n: length
-    VT_BYTE    = 0x14,  //
-    VT_WORD    = 0x15,  //
-    VT_DWORD   = 0x16,  //
-    VT_LWORD   = 0x17,  //
-    VT_WSTRING = 0x18,  // n: length
-    VT_CHAR    = 0x19,  //
-    VT_SE      = 0x1a,  // single-element variables n: [aaaa bbbb 000p pttt] a,b: hierarchical address p:(00=I, 01=Q, 10=M) t:(000=X/None, 001=B, 010=W, 011=D, 100=L)
+    VT_LTIME   = 0x0d,  //
+    VT_DATE    = 0x0e,  //
+    VT_LDATE   = 0x0f,  //
+    VT_TOD     = 0x10,  //
+    VT_LTOD    = 0x11,  //
+    VT_DT      = 0x12,  //
+    VT_LDT     = 0x13,  //
+    VT_STRING  = 0x14,  // n: length
+    VT_BYTE    = 0x15,  //
+    VT_WORD    = 0x16,  //
+    VT_DWORD   = 0x17,  //
+    VT_LWORD   = 0x18,  //
+    VT_WSTRING = 0x19,  // n: length
+    VT_CHAR    = 0x1a,  //
+    VT_WCHAR   = 0x1b,  //
+    VT_SE      = 0x1c,  // single-element variables n: [aaaa bbbb 000p pttt] a,b: hierarchical address p:(00=I, 01=Q, 10=M) t:(000=X/None, 001=B, 010=W, 011=D, 100=L)
 
 };
 
