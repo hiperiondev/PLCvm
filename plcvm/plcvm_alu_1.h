@@ -62,6 +62,8 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     tmp = 1;
 
+#define CC_VAR(n, type) (type*) calloc(n, sizeof(type))
+
     if (vm->hp[varp].var != NULL)
         free(vm->hp[varp].var);
 
@@ -74,72 +76,71 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_BOOL: {
-            vm->hp[varp].var = (bool*) calloc(1, sizeof(bool));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_BOOL));
             break;
         }
 
         case VT_SINT: {
-            vm->hp[varp].var = (int8_t*) calloc(1, sizeof(int8_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_SINT));
             break;
         }
 
         case VT_INT: {
-            vm->hp[varp].var = (int16_t*) calloc(1, sizeof(int16_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_INT));
             break;
         }
 
         case VT_DINT: {
-            vm->hp[varp].var = (int32_t*) calloc(1, sizeof(int32_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_DINT));
             break;
         }
 
         case VT_LINT: {
-            vm->hp[varp].var = (int64_t*) calloc(1, sizeof(int64_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_LINT));
             break;
         }
 
-
         case VT_USINT:
         case VT_BYTE: {
-            vm->hp[varp].var = (uint8_t*) calloc(1, sizeof(uint8_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_USINT));
             break;
         }
 
         case VT_UINT:
         case VT_WORD: {
-            vm->hp[varp].var = (uint16_t*) calloc(1, sizeof(uint16_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_UINT));
             break;
         }
 
         case VT_UDINT:
         case VT_DWORD: {
-            vm->hp[varp].var = (uint32_t*) calloc(1, sizeof(uint32_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_DINT));
             break;
         }
 
         case VT_ULINT:
         case VT_LWORD: {
-            vm->hp[varp].var = (uint64_t*) calloc(1, sizeof(uint64_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_ULINT));
             break;
         }
 
         case VT_REAL: {
-            vm->hp[varp].var = (float*) calloc(1, sizeof(float));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_REAL));
             break;
         }
 
         case VT_LREAL: {
-            vm->hp[varp].var = (double*) calloc(1, sizeof(double));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_LREAL));
             break;
         }
 
         case VT_TIME: {
-            vm->hp[varp].var = (time_t*) calloc(1, sizeof(time_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_TIME));
             break;
         }
 
         case VT_DATE: {
-            vm->hp[varp].var = (date_t*) malloc(sizeof(date_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_DATE));
             ((date_t*) vm->hp[varp].var)->date.day = 1;
             ((date_t*) vm->hp[varp].var)->date.month = 1;
             ((date_t*) vm->hp[varp].var)->date.year = 1;
@@ -147,12 +148,12 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_LDATE: {
-            vm->hp[varp].var = (int64_t*) calloc(1, sizeof(int64_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_LDATE));
             break;
         }
 
         case VT_TOD: {
-            vm->hp[varp].var = (tod_t*) calloc(1, sizeof(tod_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_TOD));
             break;
         }
 
@@ -161,7 +162,7 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_DT: {
-            vm->hp[varp].var = (dat_t*) calloc(1, sizeof(dat_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_DT));
             ((dat_t*) vm->hp[varp].var)->dat.date.date.day = 1;
             ((dat_t*) vm->hp[varp].var)->dat.date.date.month = 1;
             ((dat_t*) vm->hp[varp].var)->dat.date.date.year = 1;
@@ -169,29 +170,30 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_LDT: {
-            vm->hp[varp].var = (int64_t*) calloc(1, sizeof(int64_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_LDT));
             break;
         }
 
         case VT_STRING: {
-            vm->hp[varp].var = (char*) calloc((*n) + 1, sizeof(char));
+
+            vm->hp[varp].var = CC_VAR(*n, VTYPE(VT_STRING));
             vm->dp--;
             break;
         }
 
         case VT_WSTRING: {
-            vm->hp[varp].var = (char*) calloc((*n) * 2 + 1, sizeof(char));
+            vm->hp[varp].var = CC_VAR(*n, VTYPE(VT_WSTRING));
             vm->dp--;
             break;
         }
 
         case VT_CHAR: {
-            vm->hp[varp].var = (uint8_t*) calloc(1, sizeof(uint8_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_CHAR));
             break;
         }
 
         case VT_SE: {
-            vm->hp[varp].var = (uint16_t*) malloc(sizeof(uint16_t));
+            vm->hp[varp].var = CC_VAR(1, VTYPE(VT_SE));
             *((uint16_t*)vm->hp[varp].var) = *n;
             vm->dp--;
             fnc_sev(vm, varp);

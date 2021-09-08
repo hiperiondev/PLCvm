@@ -36,7 +36,7 @@
 #define  ALU_ARG(x)           ((x & 0xFF))                                     // arguments of alu
 #define VAR_TYPE(x)           ((x & 0xF800) >> 11)                             // variable type
 #define VAR_COMPLETE(type,id) ((type <<11)|(id))
-#define INTERNAL_TYPE(x) TYPE_##x
+#define VTYPE(x)              TYPE_##x
 
 /////// internal variable types ///////
 #define TYPE_VT_BOOL    bool
@@ -55,8 +55,16 @@
 #define TYPE_VT_WORD    uint16_t
 #define TYPE_VT_DWORD   uint32_t
 #define TYPE_VT_LWORD   uint64_t
-#define TYPE_VT_WSTRING char
+#define TYPE_VT_WSTRING wchar_t
 #define TYPE_VT_CHAR    char
-#define TYPE_VT_WCHAR   char
+#define TYPE_VT_WCHAR   wchar_t
+#define TYPE_VT_SE      uint16_t
+#define TYPE_VT_LDT     uint64_t
+#define TYPE_VT_DT      dat_t
+#define TYPE_VT_TIME    time_t
+#define TYPE_VT_DATE    date_t
+#define TYPE_VT_LDATE   int64_t
+#define TYPE_VT_TOD     tod_t
+
 
 #endif /* PLCVM_MACROS_H_ */

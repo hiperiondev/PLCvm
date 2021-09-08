@@ -59,55 +59,54 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         if ((implicit_conversion[cnt][0] == src_type) && (implicit_conversion[cnt][1] == *n)) { //implicit conversion allowed
             switch (*n) {
                 case VT_INT: {
-                    *((int16_t*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_INT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_DINT: {
-                    *((int32_t*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_DINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_LINT: {
-                    *((int64_t*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_LINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_BYTE: {
-                    *((uint8_t*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_BYTE)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_UINT:
                 case VT_WORD: {
-                    *((int16_t*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_UINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_UDINT:
                 case VT_DWORD: {
-                    *((uint32_t*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_UDINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_ULINT:
                 case VT_LWORD: {
-                    *((uint64_t*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_ULINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_REAL: {
-                    *((float*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_REAL)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_LREAL: {
-                    *((double*)vm->hp[0].var) = *t;
+                    *((VTYPE(VT_LREAL)*)vm->hp[0].var) = *t;
                     break;
                 }
 
-                case VT_LDATE: {
-                    *((int64_t*)vm->hp[0].var) = *t;
+                case VT_LDATE: { // TODO: implement
                     break;
                 }
 
@@ -119,11 +118,15 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
                     break;
                 }
 
-                case VT_STRING: { // TODO: implement
+                case VT_STRING: {
+                    ((VTYPE(VT_STRING)*)vm->hp[0].var)[0] = *(VTYPE(VT_CHAR)*)vm->hp[*t].var;
+                    vm->hp[0].len = 1;
                     break;
                 }
 
                 case VT_WSTRING: { // TODO: implement
+                    ((VTYPE(VT_WSTRING)*)vm->hp[0].var)[0] = *(VTYPE(VT_WCHAR)*)vm->hp[*t].var;
+                    vm->hp[0].len = 1;
                     break;
                 }
 
