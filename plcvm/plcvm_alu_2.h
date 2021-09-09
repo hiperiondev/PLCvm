@@ -23,7 +23,7 @@
 #ifndef PLCVM_ALU_2_H_
 #define PLCVM_ALU_2_H_
 
-// TODO: implement
+// TODO: finish implementation
 uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_CNVTOT) ");
@@ -150,68 +150,123 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     return RC_VAR_NOT_ALLWD;
 }
 
-// TODO: implement
 uint8_t fnc_alu_selmux(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_SELMUX) ");
 #endif
+    if ((*n > *t) || (*t == 0)) // K > available entries
+        return RC_VAR_ERROR;
+
+    *alu = vm->ds[*n + 2];
+    vm->dp -= *t;
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmpgrt(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CMPGRT) ");
 #endif
+    if (*t == 0)
+        return RC_VAR_ERROR;
+
+    bool res = false;
+    uint16_t cnt;
+    for (cnt = 0; *n < *t; cnt++) {
+        res = res && (vm->ds[cnt + 1] > vm->ds[cnt + 2]);
+    }
+    *alu = res;
+    vm->dp -= *t;
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmpgeq(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CMPGEQ) ");
 #endif
+    if (*t == 0)
+        return RC_VAR_ERROR;
+
+    bool res = false;
+    uint16_t cnt;
+    for (cnt = 0; *n < *t; cnt++) {
+        res = res && (vm->ds[cnt + 1] >= vm->ds[cnt + 2]);
+    }
+    *alu = res;
+    vm->dp -= *t;
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmpequ(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CMPEQU) ");
 #endif
+    if (*t == 0)
+        return RC_VAR_ERROR;
+
+    bool res = false;
+    uint16_t cnt;
+    for (cnt = 0; *n < *t; cnt++) {
+        res = res && (vm->ds[cnt + 1] == vm->ds[cnt + 2]);
+    }
+    *alu = res;
+    vm->dp -= *t;
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmples(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CMPLES) ");
 #endif
+    if (*t == 0)
+        return RC_VAR_ERROR;
+
+    bool res = false;
+    uint16_t cnt;
+    for (cnt = 0; *n < *t; cnt++) {
+        res = res && (vm->ds[cnt + 1] <= vm->ds[cnt + 2]);
+    }
+    *alu = res;
+    vm->dp -= *t;
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmplth(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CMPLTH) ");
 #endif
+    if (*t == 0)
+        return RC_VAR_ERROR;
+
+    bool res = false;
+    uint16_t cnt;
+    for (cnt = 0; n < *t; cnt++) {
+        res = res && (vm->ds[cnt + 1] < vm->ds[cnt + 2]);
+    }
+    *alu = res;
+    vm->dp -= *t;
     return RC_OK;
 }
 
-// TODO: implement
+
 uint8_t fnc_alu_cmpneq(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CMPNEQ) ");
 #endif
+
+    *alu = (*t != *n);
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_strlen(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRLEN) ");
 #endif
-    return RC_OK;
+    if ((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)) {
+        *alu = vm->hp[*t].len;
+        return RC_OK;
+    }
+
+    return RC_VAR_NOT_ALLWD;
 }
 
 // TODO: implement

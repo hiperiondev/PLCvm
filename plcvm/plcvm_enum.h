@@ -122,16 +122,16 @@ enum alu_ex_2 { // can't use RSTACK
     ALU_OP_CNVTOT = 0x00, // convert to type t: variable, n: target type, return: acc
     ALU_OP_EX2NOP = 0x01, // TRUNC []
     // standard selection functions
-    ALU_OP_SELMUX = 0x02, // MUX []
+    ALU_OP_SELMUX = 0x02, // MUX [t: entries. n+: variables (n: K). return: variable selected]
     // standard comparison functions
-    ALU_OP_CMPGRT = 0x03, // GT []
-    ALU_OP_CMPGEQ = 0x04, // GE []
-    ALU_OP_CMPEQU = 0x05, // EQ []
-    ALU_OP_CMPLES = 0x06, // LE []
-    ALU_OP_CMPLTH = 0x07, // LT []
-    ALU_OP_CMPNEQ = 0x08, // NE []
+    ALU_OP_CMPGRT = 0x03, // GT [t: entries. n+: variables: return true/false]
+    ALU_OP_CMPGEQ = 0x04, // GE [t: entries. n+: variables: return true/false]
+    ALU_OP_CMPEQU = 0x05, // EQ [t: entries. n+: variables: return true/false]
+    ALU_OP_CMPLES = 0x06, // LE [t: entries. n+: variables: return true/false]
+    ALU_OP_CMPLTH = 0x07, // LT [t: entries. n+: variables: return true/false]
+    ALU_OP_CMPNEQ = 0x08, // NE [t: variable, n:variable return t != n)
     // character string functions
-    ALU_OP_STRLEN = 0x09, // LEN []
+    ALU_OP_STRLEN = 0x09, // LEN [t: variable]
     ALU_OP_STRLFT = 0x0a, // LEFT []
     ALU_OP_STRRGH = 0x0b, // RIGHT []
     ALU_OP_STRMID = 0x0c, // MID []
@@ -216,6 +216,7 @@ enum vm_return {
     RC_VAR_TRUNC     = 0x0f, // result function on variable are truncated
     RC_VAR_OOR       = 0x10, // variable out of range (ex: string too long)
     RC_VAR_NOT_ALLWD = 0x11, // variable operation not allowed
+    RC_VAR_ERROR     = 0x12, // variable generic error
     ///////////////////////////
     RC_EXPTN         = 0xfd, // alu exception
     RC_ERROR         = 0xfe, // generic error

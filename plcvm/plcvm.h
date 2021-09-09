@@ -107,6 +107,7 @@ static inline vm_t* PLCvm_init(uint16_t ramSize, uint8_t rsSize, uint8_t dsSize,
     vm->pc = 0;
     vm->dp = 0;
     vm->rp = 0;
+    vm->exception = 0;
 
     return vm;
 }
@@ -240,8 +241,6 @@ static inline uint8_t PLCvm_step(uint16_t word, vm_t *vm) {
 
 ////////// alu function
             return_status = alu_fn[ALU_OP(word) + 32 * ALU_EX(word)](vm, word, &t, &n, &r, &alu, &aux);
-            //if (return_status)
-            //    goto exitvm;
 //////////
 
 #ifdef DEBUG
@@ -313,6 +312,7 @@ static inline uint8_t PLCvm_step(uint16_t word, vm_t *vm) {
     }
 #endif
     //exitvm:
+    vm->exception = return_status;
     return return_status;
 }
 

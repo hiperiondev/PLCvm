@@ -73,6 +73,7 @@ typedef struct {
          uint8_t ds_size;     // data stack size
          uint8_t rs_size;     // return stack size
            var_t *hp;         // variables heap
+         uint8_t exception;   // last exception
 #ifdef UNDER_OVER
         uint16_t RAM_size;    // ram size
 #endif
