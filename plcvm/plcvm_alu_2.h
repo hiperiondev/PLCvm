@@ -239,7 +239,7 @@ uint8_t fnc_alu_cmplth(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     bool res = false;
     uint16_t cnt;
-    for (cnt = 0; n < *t; cnt++) {
+    for (cnt = 0; *n < *t; cnt++) {
         res = res && (vm->ds[cnt + 1] < vm->ds[cnt + 2]);
     }
     *alu = res;
@@ -261,35 +261,83 @@ uint8_t fnc_alu_strlen(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRLEN) ");
 #endif
-    if ((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)) {
-        *alu = vm->hp[*t].len;
-        return RC_OK;
-    }
+    if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
+        return RC_VAR_NOT_ALLWD;
 
-    return RC_VAR_NOT_ALLWD;
+    *alu = vm->hp[*t].len;
+    return RC_OK;
 }
 
-// TODO: implement
+
 uint8_t fnc_alu_strlft(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRLFT) ");
 #endif
+    uint64_t cnt;
+    switch (VAR_TYPE(*t)) {
+        case VT_STRING:
+            for (cnt = 0; cnt < *n; cnt++)
+                ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
+            break;
+        case VT_WSTRING:
+            for (cnt = 0; cnt < *n; cnt++)
+                ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
+            break;
+        default:
+            return RC_VAR_NOT_ALLWD;
+    }
+
+    vm->hp[0].len = *n;
+    *alu = 0;
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_strrgh(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRRGH) ");
 #endif
+    uint64_t cnt;
+    switch (VAR_TYPE(*t)) {
+        case VT_STRING:
+            for (cnt = *n; cnt >= 0; cnt--)
+            ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
+            break;
+        case VT_WSTRING:
+            for (cnt = *n; cnt >= 0; cnt--)
+            ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
+            break;
+        default:
+            return RC_VAR_NOT_ALLWD;
+    }
+
+    vm->hp[0].len = *n;
+    vm->dp--;
+    *alu = 0;
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_strmid(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRMID) ");
 #endif
+    uint64_t cnt;
+    switch (VAR_TYPE(*t)) {
+        case VT_STRING:
+            for (cnt = *n; cnt <= vm->ds[vm->dp - 2]; cnt++)
+            ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
+            break;
+        case VT_WSTRING:
+            for (cnt = *n; cnt <= vm->ds[vm->dp - 2]; cnt++)
+            ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
+            break;
+        default:
+            return RC_VAR_NOT_ALLWD;
+    }
+
+    vm->hp[0].len = vm->ds[vm->dp - 2];
+    vm->dp -= 2;
+    *alu = 0;
+
     return RC_OK;
 }
 
@@ -298,6 +346,9 @@ uint8_t fnc_alu_strcnc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRCNC) ");
 #endif
+    if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
+        return RC_VAR_NOT_ALLWD;
+
     return RC_OK;
 }
 
@@ -306,6 +357,9 @@ uint8_t fnc_alu_strins(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRINS) ");
 #endif
+    if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
+        return RC_VAR_NOT_ALLWD;
+
     return RC_OK;
 }
 
@@ -314,6 +368,9 @@ uint8_t fnc_alu_strdel(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRDEL) ");
 #endif
+    if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
+        return RC_VAR_NOT_ALLWD;
+
     return RC_OK;
 }
 
