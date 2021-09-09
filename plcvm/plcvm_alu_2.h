@@ -57,51 +57,63 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     uint8_t src_type = VAR_TYPE(*t);
     for (cnt = 0; cnt > 20; cnt++) {
         if ((implicit_conversion[cnt][0] == src_type) && (implicit_conversion[cnt][1] == *n)) { //implicit conversion allowed
+            if (vm->hp[0].var != NULL)
+                free(vm->hp[0].var);
+
             switch (*n) {
                 case VT_INT: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_INT));
                     *((VTYPE(VT_INT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_DINT: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_DINT));
                     *((VTYPE(VT_DINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_LINT: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_LINT));
                     *((VTYPE(VT_LINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_BYTE: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_BYTE));
                     *((VTYPE(VT_BYTE)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_UINT:
                 case VT_WORD: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_UINT));
                     *((VTYPE(VT_UINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_UDINT:
                 case VT_DWORD: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_UDINT));
                     *((VTYPE(VT_UDINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_ULINT:
                 case VT_LWORD: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_ULINT));
                     *((VTYPE(VT_ULINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_REAL: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_REAL));
                     *((VTYPE(VT_REAL)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_LREAL: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_LREAL));
                     *((VTYPE(VT_LREAL)*)vm->hp[0].var) = *t;
                     break;
                 }
@@ -119,12 +131,14 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
                 }
 
                 case VT_STRING: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_STRING));
                     ((VTYPE(VT_STRING)*)vm->hp[0].var)[0] = *(VTYPE(VT_CHAR)*)vm->hp[*t].var;
                     vm->hp[0].len = 1;
                     break;
                 }
 
-                case VT_WSTRING: { // TODO: implement
+                case VT_WSTRING: {
+                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_WSTRING));
                     ((VTYPE(VT_WSTRING)*)vm->hp[0].var)[0] = *(VTYPE(VT_WCHAR)*)vm->hp[*t].var;
                     vm->hp[0].len = 1;
                     break;
@@ -274,12 +288,18 @@ uint8_t fnc_alu_strlft(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX2_STRLFT) ");
 #endif
     uint64_t cnt;
+
+    if (vm->hp[0].var != NULL)
+        free(vm->hp[0].var);
+
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
+            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_STRING));
             for (cnt = 0; cnt < *n; cnt++)
                 ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
             break;
         case VT_WSTRING:
+            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_WSTRING));
             for (cnt = 0; cnt < *n; cnt++)
                 ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
             break;
@@ -296,13 +316,18 @@ uint8_t fnc_alu_strrgh(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRRGH) ");
 #endif
+    if (vm->hp[0].var != NULL)
+        free(vm->hp[0].var);
+
     uint64_t cnt;
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
+            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_STRING));
             for (cnt = *n; cnt >= 0; cnt--)
             ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
             break;
         case VT_WSTRING:
+            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_WSTRING));
             for (cnt = *n; cnt >= 0; cnt--)
             ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
             break;
@@ -320,6 +345,10 @@ uint8_t fnc_alu_strmid(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRMID) ");
 #endif
+
+    if (vm->hp[0].var != NULL)
+        free(vm->hp[0].var);
+
     uint64_t cnt;
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
@@ -348,6 +377,9 @@ uint8_t fnc_alu_strcnc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #endif
     if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
         return RC_VAR_NOT_ALLWD;
+
+    if (vm->hp[0].var != NULL)
+        free(vm->hp[0].var);
 
     return RC_OK;
 }
