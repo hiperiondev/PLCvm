@@ -25,20 +25,40 @@
 
 #include <stdint.h>
 
-#define       OP(x) (x & 0xe000)                                     // operand
-#define   ARG_OP(x) (x & 0x1fff)                                     // argument of operand
-#define  ARG_LIT(x) (x & 0x7fff)                                     // literal
+#define                 EP(x) [x] = #x                                         // enum print
 
-#define   ALU_OP(x)           ((x >> 8) & 0x1F)                                // alu operation
-#define   ALU_DS(x)           (x & 0x03)                                       // alu data stack
-#define   ALU_RS(x)           ((x >> 2) & 0x03)                                // alu return stack
-#define   ALU_EX(x)           ((ALU_DS(x) == 0x03)|((ALU_RS(x) == 0x03) << 1)) // extended bits
-#define  ALU_ARG(x)           ((x & 0xFF))                                     // arguments of alu
-#define VAR_TYPE(x)           ((x & 0xF800) >> 11)                             // variable type
+#define                 OP(x) (x & 0xe000)                                     // operand
+#define             ARG_OP(x) (x & 0x1fff)                                     // argument of operand
+#define            ARG_LIT(x) (x & 0x7fff)                                     // literal
+
+#define             ALU_OP(x) ((x >> 8) & 0x1F)                                // alu operation
+#define             ALU_DS(x) (x & 0x03)                                       // alu data stack
+#define             ALU_RS(x) ((x >> 2) & 0x03)                                // alu return stack
+#define             ALU_EX(x) ((ALU_DS(x) == 0x03)|((ALU_RS(x) == 0x03) << 1)) // extended bits
+#define            ALU_ARG(x) ((x & 0xFF))                                     // arguments of alu
+#define           VAR_TYPE(x) ((x & 0xF800) >> 11)                             // variable type
 #define VAR_COMPLETE(type,id) ((type <<11)|(id))
-#define VTYPE(x)              TYPE_##x
-#define FREE_ACC              if (vm->hp[0].var != NULL) \
+#define              VTYPE(x) TYPE_##x
+#define              FREE_ACC if (vm->hp[0].var != NULL) \
                                   free(vm->hp[0].var);
+#define       CC_VAR(n, type) (type*) calloc(n, sizeof(type))
+#define            ANY_NUM(x) ( \
+                                  (x == VT_SINT)  || \
+                                  (x == VT_INT)   || \
+                                  (x == VT_DINT)  || \
+                                  (x == VT_LINT)  || \
+                                  (x == VT_USINT) || \
+                                  (x == VT_UINT)  || \
+                                  (x == VT_UDINT) || \
+                                  (x == VT_ULINT) || \
+                                  (x == VT_REAL)  || \
+                                  (x == VT_LREAL) || \
+                                  (x == VT_BYTE)  || \
+                                  (x == VT_WORD)  || \
+                                  (x == VT_DWORD) || \
+                                  (x == VT_LWORD) \
+                              )
+#define           ANY_REAL(x) ((x == VT_REAL) || (x == VT_LREAL))
 
 /////// internal variable types ///////
 #define TYPE_VT_BOOL    bool
@@ -67,6 +87,5 @@
 #define TYPE_VT_DATE    date_t
 #define TYPE_VT_LDATE   int64_t
 #define TYPE_VT_TOD     tod_t
-
 
 #endif /* PLCVM_MACROS_H_ */

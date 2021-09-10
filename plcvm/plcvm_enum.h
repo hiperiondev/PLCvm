@@ -64,7 +64,7 @@ enum alu_0 {
     ALU_OP_ALUGRS = 0x13, // depth of return stack
     ALU_OP_ALUSSP = 0x14, // set data stack depth
     ALU_OP_ALUSRP = 0x15, // set return stack depth
-    ALU_OP_ALUREG = 0x16, // get register t (status t == 0xff)
+    ALU_OP_ALUREG = 0x16, // get register t (t=0xff status; t=0xfe last exception )
     ALU_OP_ALUSRG = 0x17, // set n on register t (status t == 0xff)
     ALU_OP_ALUUMD = 0x18, // u/mod
     ALU_OP_ALUMOD = 0x19, // /mod
@@ -274,7 +274,6 @@ enum vm_vartypes {
     VT_CHAR    = 0x1a,  //
     VT_WCHAR   = 0x1b,  //
     VT_SE      = 0x1c,  // single-element variables n: [aaaa bbbb 000p pttt] a,b: hierarchical address p:(00=I, 01=Q, 10=M) t:(000=X/None, 001=B, 010=W, 011=D, 100=L)
-
 };
 
 #endif /* PLCVM_ENUM_H_ */

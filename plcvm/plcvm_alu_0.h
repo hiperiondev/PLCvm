@@ -317,6 +317,12 @@ uint8_t fnc_alu_alureg(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         *alu = vm->status;
         return RC_OK;
     }
+
+    if (*t == 0xff) {
+        *alu = vm->exception;
+        return RC_OK;
+    }
+
     if (*t > vm->reg_size - 1)
         return RC_REG_UNKNOWN;
     *alu = vm->reg[*t];
