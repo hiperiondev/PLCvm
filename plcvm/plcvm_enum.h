@@ -95,26 +95,27 @@ enum alu_ex_1 { // can't use DSTACK
     // standard arithmetic functions
     ALU_OP_ATHADD = 0x0d, // ADD [t: qty, n+:vars return: acc]
     ALU_OP_ATHMUL = 0x0e, // MUL [t: qty, n+:vars return: acc]
-    ALU_OP_ATHSUB = 0x0f, // SUB []
-    ALU_OP_ATHDIV = 0x10, // DIV []
-    ALU_OP_ATHMOD = 0x11, // MOD []
-    ALU_OP_ATHEXP = 0x12, // EXPT []
+    ALU_OP_ATHSUB = 0x0f, // SUB [t: variable n: variable return: acc]
+    ALU_OP_ATHDIV = 0x10, // DIV [t: variable n: variable return: acc]
+    ALU_OP_ATHMOD = 0x11, // MOD [t: variable n: variable return: acc]
+    ALU_OP_ATHEXP = 0x12, // EXPT [t: variable n: variable return: acc]
     ALU_OP_ATHMOV = 0x13, // MOVE []
     // bit string functions
-    ALU_OP_BITSHL = 0x14, // SHL []
-    ALU_OP_BITSHR = 0x15, // SHR []
-    ALU_OP_BITROR = 0x16, // ROR []
-    ALU_OP_BITROL = 0x17, // ROL []
+    ALU_OP_BITSHL = 0x14, // SHL [t: variable n: variable return: acc]
+    ALU_OP_BITSHR = 0x15, // SHR [t: variable n: variable return: acc]
+    ALU_OP_BITROR = 0x16, // ROR [t: variable n: variable return: acc]
+    ALU_OP_BITROL = 0x17, // ROL [t: variable n: variable return: acc]
     // selection and comparison functions
-    ALU_OP_CMPAND = 0x18, // AND []
-    ALU_OP_CMPORF = 0x19, // OR []
-    ALU_OP_CMPXOR = 0x1a, // XOR []
-    ALU_OP_CMPNOT = 0x1b, // NOT []
+    ALU_OP_CMPAND = 0x18, // AND [t: qty, n+:vars return: acc]
+    ALU_OP_CMPORF = 0x19, // OR [t: qty, n+:vars return: acc]
+    ALU_OP_CMPXOR = 0x1a, // XOR [t: qty, n+:vars return: acc]
+    ALU_OP_CMPNOT = 0x1b, // NOT [t: variable return: acc]
     // standard selection functions
-    ALU_OP_EX1NOP = 0x1c, //
-    ALU_OP_SELMAX = 0x1d, // MAX []
-    ALU_OP_SELMIN = 0x1e, // MIN []
-    ALU_OP_EX1_031 = 0x1f, //
+    ALU_OP_SELMAX = 0x1c, // MAX [t: qty, n+:vars return: acc]
+    ALU_OP_SELMIN = 0x1d, // MIN [t: qty, n+:vars return: acc]
+    // endian conversion
+    ALU_OP_ENCTBI = 0x1e, // TO_BIG_ENDIAN
+    ALU_OP_ENCTLI = 0x1f, // TO_LITTLE_ENDIAN
 };
 
 enum alu_ex_2 { // can't use RSTACK

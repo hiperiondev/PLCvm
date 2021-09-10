@@ -89,11 +89,10 @@ uint8_t (*alu_fn[])(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t 
     fnc_alu_cmporf,
     fnc_alu_cmpxor,
     fnc_alu_cmpnot,
-    fnc_alu_alutop,
     fnc_alu_selmax,
     fnc_alu_selmin,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
+    fnc_alu_enctbi,
+    fnc_alu_enctli,
 
     fnc_alu_varcvr,
     fnc_alu_varsvr,

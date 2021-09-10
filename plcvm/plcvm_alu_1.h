@@ -651,8 +651,8 @@ uint8_t fnc_alu_cmpand(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
 
     uint16_t cnt;
-    for (cnt = 0; cnt < *n; cnt++) {
-        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+    for (cnt = 0; cnt < *t; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[cnt].var));
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
@@ -660,7 +660,7 @@ uint8_t fnc_alu_cmpand(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     *alu = 0;
-    POP(*n)
+    POP(*t)
     return RC_OK;
 }
 
@@ -673,8 +673,8 @@ uint8_t fnc_alu_cmporf(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
 
     uint16_t cnt;
-    for (cnt = 0; cnt < *n; cnt++) {
-        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+    for (cnt = 0; cnt < *t; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[cnt].var));
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
@@ -682,7 +682,7 @@ uint8_t fnc_alu_cmporf(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     *alu = 0;
-    POP(*n)
+    POP(*t)
     return RC_OK;
 }
 
@@ -695,8 +695,8 @@ uint8_t fnc_alu_cmpxor(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
 
     uint16_t cnt;
-    for (cnt = 0; cnt < *n; cnt++) {
-        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+    for (cnt = 0; cnt < *t; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[cnt].var));
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
@@ -704,7 +704,7 @@ uint8_t fnc_alu_cmpxor(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     *alu = 0;
-    POP(*n)
+    POP(*t)
     return RC_OK;
 }
 
@@ -733,8 +733,8 @@ uint8_t fnc_alu_selmax(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     uint16_t cnt;
     TYPE_VT_ULINT max = 0;
-    for (cnt = 0; cnt < *n; cnt++) {
-        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+    for (cnt = 0; cnt < *t; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[cnt].var));
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
@@ -744,7 +744,7 @@ uint8_t fnc_alu_selmax(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = max;
 
     *alu = 0;
-    POP(*n)
+    POP(*t)
     return RC_OK;
 }
 
@@ -758,8 +758,8 @@ uint8_t fnc_alu_selmin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     uint16_t cnt;
     TYPE_VT_ULINT min = *((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1]].var);
-    for (cnt = 0; cnt < *n; cnt++) {
-        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+    for (cnt = 0; cnt < *t; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[cnt].var));
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
@@ -770,6 +770,18 @@ uint8_t fnc_alu_selmin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     *alu = 0;
     POP(*n)
+    return RC_OK;
+}
+
+// TODO: implement
+uint8_t fnc_alu_enctbi(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
+    *alu = 0;
+    return RC_OK;
+}
+
+// TODO: implement
+uint8_t fnc_alu_enctli(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
+    *alu = 0;
     return RC_OK;
 }
 

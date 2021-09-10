@@ -165,10 +165,10 @@ const char *ALU_EX1[] = {
     EP(ALU_OP_CMPORF),
     EP(ALU_OP_CMPXOR),
     EP(ALU_OP_CMPNOT),
-    EP(ALU_OP_EX1NOP),
     EP(ALU_OP_SELMAX),
     EP(ALU_OP_SELMIN),
-    EP(ALU_OP_EX1_031),
+    EP(ALU_OP_ENCTBI),
+    EP(ALU_OP_ENCTLI)
 };
 
 const char *ALU_EX2[] = {

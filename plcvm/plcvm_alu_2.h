@@ -430,6 +430,7 @@ uint8_t fnc_alu_strins(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         case VT_STRING:
             CC_VAR(0, len, VT_STRING);
 
+
             break;
         case VT_WSTRING:
             CC_VAR(0, len, VT_WSTRING);
@@ -439,7 +440,7 @@ uint8_t fnc_alu_strins(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     vm->hp[0].len = len;
     *alu = 0;
-    //TODO: POP()
+    POP(2)
     return RC_OK;
 }
 
@@ -452,7 +453,7 @@ uint8_t fnc_alu_strdel(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
     FREE_ACC
 
-    //TODO: POP()
+    POP(2)
     return RC_OK;
 }
 
@@ -462,7 +463,7 @@ uint8_t fnc_alu_chrrpl(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX2_CHRRPL) ");
 #endif
 
-    //TODO: POP()
+    POP(3)
     return RC_OK;
 }
 
@@ -472,7 +473,7 @@ uint8_t fnc_alu_chrfnd(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX2_CHRFND) ");
 #endif
 
-    //TODO: POP()
+    POP(1)
     return RC_OK;
 }
 
