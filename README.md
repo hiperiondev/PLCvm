@@ -2,6 +2,10 @@
 Virtual Machine for IEC 61131-3
 
 ( work in process... )
+TODO:
+* complete functions
+* test
+* optional compilation by functions groups
 
 Functions implemented:
 ```diff
