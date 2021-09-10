@@ -1,8 +1,7 @@
 # PLCvm
-Virtual Machine for IEC 61131-3
+Virtual Machine for IEC 61131-3 ( work in process... )
 
-( work in process... )
-TODO:
+*TODO:*
 * complete functions
 * test
 * optional compilation by functions groups
