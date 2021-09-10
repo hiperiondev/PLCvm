@@ -295,7 +295,7 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
             break;
         }
 
-        case VT_SE: {
+        case VT_SE: { // TODO: implement
             break;
         }
     }
