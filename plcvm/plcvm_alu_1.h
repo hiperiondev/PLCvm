@@ -212,7 +212,7 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         fnc_var_persist(vm, varp);
 
     *alu = varp;
-
+    POP(1)
     return RC_OK;
 }
 
@@ -300,7 +300,7 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
     }
 
-    vm->dp-= pop;
+    POP(pop)
     return RC_OK;
 }
 
@@ -497,6 +497,7 @@ uint8_t fnc_alu_athmul(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     *alu = 0;
+    POP(*n)
     return RC_OK;
 }
 
@@ -512,6 +513,7 @@ uint8_t fnc_alu_athsub(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_LREAL*) vm->hp[0].var)) = (*((TYPE_VT_LREAL*) vm->hp[*t].var)) - (*((TYPE_VT_LREAL*) vm->hp[*n].var));
 
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -529,6 +531,7 @@ uint8_t fnc_alu_athdiv(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_LREAL*) vm->hp[0].var)) = (*((TYPE_VT_LREAL*) vm->hp[*t].var)) / (*((TYPE_VT_LREAL*) vm->hp[*n].var));
 
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -546,6 +549,7 @@ uint8_t fnc_alu_athmod(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_LREAL*) vm->hp[0].var)) = (*((TYPE_VT_LREAL*) vm->hp[*t].var)) * (*((TYPE_VT_LREAL*) vm->hp[*n].var));
 
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -561,6 +565,7 @@ uint8_t fnc_alu_athexp(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_LREAL*) vm->hp[0].var)) = pow((*((TYPE_VT_LREAL*) vm->hp[*t].var)), (*((TYPE_VT_LREAL*) vm->hp[*n].var)));
 
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -584,6 +589,7 @@ uint8_t fnc_alu_bitshl(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[0].var)) = (*((TYPE_VT_ULINT*) vm->hp[*t].var)) << (*((TYPE_VT_ULINT*) vm->hp[*n].var));
 
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -599,6 +605,7 @@ uint8_t fnc_alu_bitshr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[0].var)) = (*((TYPE_VT_ULINT*) vm->hp[*t].var)) >> (*((TYPE_VT_ULINT*) vm->hp[*n].var));
 
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -614,6 +621,7 @@ uint8_t fnc_alu_bitror(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[0].var)) = ((*((TYPE_VT_ULINT*) vm->hp[*t].var)) >> (*((TYPE_VT_ULINT*) vm->hp[*n].var)))
                                           | (*((TYPE_VT_ULINT*) vm->hp[*t].var)) << (64 - *((TYPE_VT_ULINT*) vm->hp[*n].var));
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -630,6 +638,7 @@ uint8_t fnc_alu_bitrol(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
                                         | (*((TYPE_VT_ULINT*) vm->hp[*t].var)) >> (64 - *((TYPE_VT_ULINT*) vm->hp[*n].var));
 
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -651,6 +660,7 @@ uint8_t fnc_alu_cmpand(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     *alu = 0;
+    POP(*n)
     return RC_OK;
 }
 
@@ -672,6 +682,7 @@ uint8_t fnc_alu_cmporf(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     *alu = 0;
+    POP(*n)
     return RC_OK;
 }
 
@@ -693,6 +704,7 @@ uint8_t fnc_alu_cmpxor(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     *alu = 0;
+    POP(*n)
     return RC_OK;
 }
 
@@ -732,6 +744,7 @@ uint8_t fnc_alu_selmax(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = max;
 
     *alu = 0;
+    POP(*n)
     return RC_OK;
 }
 
@@ -756,6 +769,7 @@ uint8_t fnc_alu_selmin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = min;
 
     *alu = 0;
+    POP(*n)
     return RC_OK;
 }
 

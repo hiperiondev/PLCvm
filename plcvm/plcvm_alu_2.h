@@ -157,9 +157,9 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
     }
 
+    POP(1)
     exit:
     // conversion not allowed
-    vm->dp--;
     return RC_VAR_NOT_ALLWD;
 }
 
@@ -171,7 +171,7 @@ uint8_t fnc_alu_selmux(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_ERROR;
 
     *alu = vm->ds[*n + 2];
-    vm->dp -= *t;
+    POP(*t)
     return RC_OK;
 }
 
@@ -188,7 +188,7 @@ uint8_t fnc_alu_cmpgrt(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         res = res && (vm->ds[cnt + 1] > vm->ds[cnt + 2]);
 
     *alu = res;
-    vm->dp -= *t;
+    POP(*t)
     return RC_OK;
 }
 
@@ -205,7 +205,7 @@ uint8_t fnc_alu_cmpgeq(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         res = res && (vm->ds[cnt + 1] >= vm->ds[cnt + 2]);
 
     *alu = res;
-    vm->dp -= *t;
+    POP(*t)
     return RC_OK;
 }
 
@@ -222,7 +222,7 @@ uint8_t fnc_alu_cmpequ(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         res = res && (vm->ds[cnt + 1] == vm->ds[cnt + 2]);
 
     *alu = res;
-    vm->dp -= *t;
+    POP(*t)
     return RC_OK;
 }
 
@@ -239,7 +239,7 @@ uint8_t fnc_alu_cmples(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         res = res && (vm->ds[cnt + 1] <= vm->ds[cnt + 2]);
 
     *alu = res;
-    vm->dp -= *t;
+    POP(*t)
     return RC_OK;
 }
 
@@ -256,7 +256,7 @@ uint8_t fnc_alu_cmplth(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         res = res && (vm->ds[cnt + 1] < vm->ds[cnt + 2]);
 
     *alu = res;
-    vm->dp -= *t;
+    POP(*t)
     return RC_OK;
 }
 
@@ -267,6 +267,7 @@ uint8_t fnc_alu_cmpneq(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #endif
 
     *alu = (*t != *n);
+    POP(1)
     return RC_OK;
 }
 
@@ -306,6 +307,7 @@ uint8_t fnc_alu_strlft(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     vm->hp[0].len = *n;
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -332,8 +334,8 @@ uint8_t fnc_alu_strrgh(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     vm->hp[0].len = *n;
-    vm->dp--;
     *alu = 0;
+    POP(1)
     return RC_OK;
 }
 
@@ -360,7 +362,7 @@ uint8_t fnc_alu_strmid(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     vm->hp[0].len = vm->ds[vm->dp - 2];
-    vm->dp -= 2;
+    POP(2)
     *alu = 0;
 
     return RC_OK;
@@ -407,7 +409,7 @@ uint8_t fnc_alu_strcnc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     }
 
     vm->hp[0].len = len;
-    vm->dp -= *t;
+    POP(*t);
     *alu = 0;
     return RC_OK;
 }
@@ -437,6 +439,7 @@ uint8_t fnc_alu_strins(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     vm->hp[0].len = len;
     *alu = 0;
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -449,6 +452,7 @@ uint8_t fnc_alu_strdel(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
     FREE_ACC
 
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -457,6 +461,8 @@ uint8_t fnc_alu_chrrpl(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CHRRPL) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -465,6 +471,8 @@ uint8_t fnc_alu_chrfnd(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_CHRFND) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -473,6 +481,8 @@ uint8_t fnc_alu_timadd(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_TIMADD) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -481,6 +491,8 @@ uint8_t fnc_alu_timsum(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_TIMSUM) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -489,6 +501,8 @@ uint8_t fnc_alu_timmul(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_TIMMUL) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -497,6 +511,8 @@ uint8_t fnc_alu_timdiv(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_TIMDIV) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -505,6 +521,8 @@ uint8_t fnc_alu_timcnc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_TIMCNC) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -513,6 +531,8 @@ uint8_t fnc_alu_enmsel(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_ENMSEL) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -521,6 +541,8 @@ uint8_t fnc_alu_enmmux(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_ENMMUX) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -529,6 +551,8 @@ uint8_t fnc_alu_enmequ(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_ENMEQU) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 
@@ -537,6 +561,8 @@ uint8_t fnc_alu_enmneq(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_ENMNEQ) ");
 #endif
+
+    //TODO: POP()
     return RC_OK;
 }
 

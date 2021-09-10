@@ -36,6 +36,9 @@
 #define             ALU_RS(x) ((x >> 2) & 0x03)                                // alu return stack
 #define             ALU_EX(x) ((ALU_DS(x) == 0x03)|((ALU_RS(x) == 0x03) << 1)) // extended bits
 #define            ALU_ARG(x) ((x & 0xFF))                                     // arguments of alu
+
+#define                POP(x) vm->dp -= x;
+
 #define           VAR_TYPE(x) ((x & 0xF800) >> 11)                             // variable type
 #define VAR_COMPLETE(type,id) ((type <<11)|(id))
 #define              VTYPE(x) TYPE_##x
