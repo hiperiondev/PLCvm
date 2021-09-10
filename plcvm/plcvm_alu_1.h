@@ -313,9 +313,9 @@ uint8_t fnc_alu_numabs(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = abs(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = abs(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -324,13 +324,13 @@ uint8_t fnc_alu_numsqr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMSQR) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = sqrt(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = sqrt(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -339,13 +339,13 @@ uint8_t fnc_alu_numlon(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMLON) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = log(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = log(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -354,13 +354,13 @@ uint8_t fnc_alu_numlog(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMLOG) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = log10(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = log10(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -369,11 +369,11 @@ uint8_t fnc_alu_numexp(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMEXP) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
     FREE_ACC
-        vm->hp[0].var = CC_VAR(1, double);
-
+        vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -382,13 +382,13 @@ uint8_t fnc_alu_numsin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMSIN) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = sin(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = sin(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -397,13 +397,13 @@ uint8_t fnc_alu_numcos(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMCOS) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = cos(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = cos(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -412,15 +412,15 @@ uint8_t fnc_alu_numtan(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMTAN) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
-    if (*((double*) vm->hp[*t].var))
+    if (*((TYPE_VT_LREAL*) vm->hp[*t].var))
         return RC_EXPTN;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = tan(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = tan(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -429,13 +429,13 @@ uint8_t fnc_alu_numasn(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMASN) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = asin(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = asin(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -444,13 +444,13 @@ uint8_t fnc_alu_numacs(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMACS) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = acos(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = acos(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -459,13 +459,13 @@ uint8_t fnc_alu_numatn(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMATN) ");
 #endif
-    if (ANY_REAL(VAR_TYPE(*t)))
+    if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    *((double*) vm->hp[0].var) = atan(*((double*) vm->hp[*t].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    *((TYPE_VT_LREAL*) vm->hp[0].var) = atan(*((TYPE_VT_LREAL*) vm->hp[*t].var));
+    vm->hp[0].type = VT_LREAL;
     *alu = 0;
     return RC_OK;
 }
@@ -475,17 +475,19 @@ uint8_t fnc_alu_athadd(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_ATHADD) ");
 #endif
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    (*((double*) vm->hp[*t].var)) = 0;
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    (*((TYPE_VT_LREAL*) vm->hp[*t].var)) = 0;
 
     uint16_t cnt;
     for (cnt = 0; cnt < *n; cnt++) {
-        uint8_t type = (*((double*) vm->hp[*t].var));
+        uint8_t type = (*((TYPE_VT_LREAL*) vm->hp[*t].var));
         if (!(ANY_NUM(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
-        (*((double*) vm->hp[*t].var)) += (*((double*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+        (*((TYPE_VT_LREAL*) vm->hp[*t].var)) += (*((TYPE_VT_LREAL*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
     }
+    vm->hp[0].type = VT_LREAL;
+    *alu = 0;
     return RC_OK;
 }
 
@@ -494,18 +496,19 @@ uint8_t fnc_alu_athmul(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_ATHMUL) ");
 #endif
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    (*((double*) vm->hp[*t].var)) = 0;
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    (*((TYPE_VT_LREAL*) vm->hp[*t].var)) = 0;
 
     uint16_t cnt;
     for (cnt = 0; cnt < *n; cnt++) {
-        uint8_t type = (*((double*) vm->hp[*t].var));
+        uint8_t type = (*((TYPE_VT_LREAL*) vm->hp[*t].var));
         if (!(ANY_NUM(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
-        (*((double*) vm->hp[*t].var)) *= (*((double*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+        (*((TYPE_VT_LREAL*) vm->hp[*t].var)) *= (*((TYPE_VT_LREAL*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
     }
-
+    vm->hp[0].type = VT_LREAL;
+    *alu = 0;
     return RC_OK;
 }
 
@@ -513,13 +516,14 @@ uint8_t fnc_alu_athsub(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_ATHSUB) ");
 #endif
-    if (ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n)))
+    if (!(ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n))))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    (*((double*) vm->hp[0].var)) = (*((double*) vm->hp[*t].var)) - (*((double*) vm->hp[*n].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    (*((TYPE_VT_LREAL*) vm->hp[0].var)) = (*((TYPE_VT_LREAL*) vm->hp[*t].var)) - (*((TYPE_VT_LREAL*) vm->hp[*n].var));
+    vm->hp[0].type = VT_LREAL;
+    *alu = 0;
     return RC_OK;
 }
 
@@ -527,15 +531,16 @@ uint8_t fnc_alu_athdiv(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_ATHDIV) ");
 #endif
-    if (ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n)))
+    if (!(ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n))))
         return RC_VAR_NOT_ALLWD;
-    if (*((double*) vm->hp[*n].var) == 0)
+    if (*((TYPE_VT_LREAL*) vm->hp[*n].var) == 0)
         return RC_EXPTN;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    (*((double*) vm->hp[0].var)) = (*((double*) vm->hp[*t].var)) / (*((double*) vm->hp[*n].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    (*((TYPE_VT_LREAL*) vm->hp[0].var)) = (*((TYPE_VT_LREAL*) vm->hp[*t].var)) / (*((TYPE_VT_LREAL*) vm->hp[*n].var));
+    vm->hp[0].type = VT_LREAL;
+    *alu = 0;
     return RC_OK;
 }
 
@@ -543,15 +548,16 @@ uint8_t fnc_alu_athmod(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_ATHMOD) ");
 #endif
-    if (ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n)))
+    if (!(ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n))))
         return RC_VAR_NOT_ALLWD;
-    if (*((double*) vm->hp[*n].var) == 0)
+    if (*((TYPE_VT_LREAL*) vm->hp[*n].var) == 0)
         return RC_EXPTN;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    (*((double*) vm->hp[0].var)) = (*((double*) vm->hp[*t].var)) * (*((double*) vm->hp[*n].var));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    (*((TYPE_VT_LREAL*) vm->hp[0].var)) = (*((TYPE_VT_LREAL*) vm->hp[*t].var)) * (*((TYPE_VT_LREAL*) vm->hp[*n].var));
+    vm->hp[0].type = VT_LREAL;
+    *alu = 0;
     return RC_OK;
 }
 
@@ -559,13 +565,14 @@ uint8_t fnc_alu_athexp(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_ATHEXP) ");
 #endif
-    if (ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n)))
+    if (!(ANY_NUM(VAR_TYPE(*t)) || ANY_NUM(VAR_TYPE(*n))))
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    vm->hp[0].var = CC_VAR(1, double);
-    (*((double*) vm->hp[0].var)) = pow((*((double*) vm->hp[*t].var)), (*((double*) vm->hp[*n].var)));
-
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_LREAL);
+    (*((TYPE_VT_LREAL*) vm->hp[0].var)) = pow((*((TYPE_VT_LREAL*) vm->hp[*t].var)), (*((TYPE_VT_LREAL*) vm->hp[*n].var)));
+    vm->hp[0].type = VT_LREAL;
+    *alu = 0;
     return RC_OK;
 }
 
@@ -577,35 +584,69 @@ uint8_t fnc_alu_athmov(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_bitshl(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_BITSHL) ");
 #endif
+    if (!(ANY_BIT(VAR_TYPE(*t)) || ANY_BIT(VAR_TYPE(*n))))
+        return RC_VAR_NOT_ALLWD;
+
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[0].var)) = (*((TYPE_VT_ULINT*) vm->hp[*t].var)) << (*((TYPE_VT_ULINT*) vm->hp[*n].var));
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_bitshr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_BITSHR) ");
 #endif
+    if (!(ANY_BIT(VAR_TYPE(*t)) || ANY_BIT(VAR_TYPE(*n))))
+        return RC_VAR_NOT_ALLWD;
+
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[0].var)) = (*((TYPE_VT_ULINT*) vm->hp[*t].var)) >> (*((TYPE_VT_ULINT*) vm->hp[*n].var));
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_bitror(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_BITROR) ");
 #endif
+    if (!(ANY_BIT(VAR_TYPE(*t)) || ANY_BIT(VAR_TYPE(*n))))
+        return RC_VAR_NOT_ALLWD;
+
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[0].var)) = ((*((TYPE_VT_ULINT*) vm->hp[*t].var)) >> (*((TYPE_VT_ULINT*) vm->hp[*n].var)))
+                                          | (*((TYPE_VT_ULINT*) vm->hp[*t].var)) << (64 - *((TYPE_VT_ULINT*) vm->hp[*n].var));
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_bitrol(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_BITROL) ");
 #endif
+    if (!(ANY_BIT(VAR_TYPE(*t)) || ANY_BIT(VAR_TYPE(*n))))
+        return RC_VAR_NOT_ALLWD;
+
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[0].var)) = ((*((TYPE_VT_ULINT*) vm->hp[*t].var)) >> (*((TYPE_VT_ULINT*) vm->hp[*n].var)))
+                                        | (*((TYPE_VT_ULINT*) vm->hp[*t].var)) >> (64 - *((TYPE_VT_ULINT*) vm->hp[*n].var));
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 

@@ -59,6 +59,20 @@
                                   (x == VT_LWORD) \
                               )
 #define           ANY_REAL(x) ((x == VT_REAL) || (x == VT_LREAL))
+#define            ANY_BIT(x) ( \
+                                  (x == VT_SINT)  || \
+                                  (x == VT_INT)   || \
+                                  (x == VT_DINT)  || \
+                                  (x == VT_LINT)  || \
+                                  (x == VT_USINT) || \
+                                  (x == VT_UINT)  || \
+                                  (x == VT_UDINT) || \
+                                  (x == VT_ULINT) || \
+                                  (x == VT_BYTE)  || \
+                                  (x == VT_WORD)  || \
+                                  (x == VT_DWORD) || \
+                                  (x == VT_LWORD) \
+                               )
 
 /////// internal variable types ///////
 #define TYPE_VT_BOOL    bool
