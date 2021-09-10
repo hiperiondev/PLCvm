@@ -57,8 +57,7 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     uint8_t src_type = VAR_TYPE(*t);
     for (cnt = 0; cnt > 20; cnt++) {
         if ((implicit_conversion[cnt][0] == src_type) && (implicit_conversion[cnt][1] == *n)) { //implicit conversion allowed
-            if (vm->hp[0].var != NULL)
-                free(vm->hp[0].var);
+            FREE_ACC
 
             switch (*n) {
                 case VT_INT: {
@@ -288,9 +287,7 @@ uint8_t fnc_alu_strlft(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX2_STRLFT) ");
 #endif
     uint64_t cnt;
-
-    if (vm->hp[0].var != NULL)
-        free(vm->hp[0].var);
+    FREE_ACC
 
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
@@ -316,8 +313,7 @@ uint8_t fnc_alu_strrgh(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRRGH) ");
 #endif
-    if (vm->hp[0].var != NULL)
-        free(vm->hp[0].var);
+    FREE_ACC
 
     uint64_t cnt;
     switch (VAR_TYPE(*t)) {
@@ -345,17 +341,17 @@ uint8_t fnc_alu_strmid(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRMID) ");
 #endif
-
-    if (vm->hp[0].var != NULL)
-        free(vm->hp[0].var);
+    FREE_ACC
 
     uint64_t cnt;
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
+            vm->hp[0].var = CC_VAR(vm->ds[vm->dp - 2], VTYPE(VT_STRING));
             for (cnt = *n; cnt <= vm->ds[vm->dp - 2]; cnt++)
             ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
             break;
         case VT_WSTRING:
+            vm->hp[0].var = CC_VAR(vm->ds[vm->dp - 2], VTYPE(VT_WSTRING));
             for (cnt = *n; cnt <= vm->ds[vm->dp - 2]; cnt++)
             ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
             break;
@@ -375,12 +371,45 @@ uint8_t fnc_alu_strcnc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRCNC) ");
 #endif
-    if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
+    FREE_ACC
+
+    uint64_t cnt, cnt2, pos = 0, len = 0;
+    for (cnt = 0; cnt < *t; cnt++) {
+        int16_t var = vm->ds[vm->dp - 1 - cnt];
+        if (!((vm->hp[var].type == VT_STRING) || (vm->hp[var].type == VT_WSTRING)))
+            return RC_VAR_NOT_ALLWD;
+
+        len += vm->hp[var].len;
+    }
+
+    switch (VAR_TYPE(*t)) {
+        case VT_STRING:
+            vm->hp[0].var = CC_VAR(len, VTYPE(VT_STRING));
+            for (cnt = 0; cnt < *t; cnt++) {
+                uint16_t var = vm->ds[vm->dp - 1 - cnt];
+                for (cnt2 = pos; cnt2 < vm->hp[var].len; cnt2++) {
+                    ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt2] = ((VTYPE(VT_STRING)*)(vm->hp[var].var))[cnt2];
+                    pos++;
+                }
+            }
+            break;
+        case VT_WSTRING:
+            vm->hp[0].var = CC_VAR(len, VTYPE(VT_STRING));
+            for (cnt = 0; cnt < *t; cnt++) {
+                uint16_t var = vm->ds[vm->dp - 1 - cnt];
+                for (cnt2 = pos; cnt2 < vm->hp[var].len; cnt2++) {
+                    ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt2] = ((VTYPE(VT_STRING)*)(vm->hp[var].var))[cnt2];
+                    pos++;
+                }
+            }
+            break;
+        default:
         return RC_VAR_NOT_ALLWD;
+    }
 
-    if (vm->hp[0].var != NULL)
-        free(vm->hp[0].var);
-
+    vm->hp[0].len = len;
+    vm->dp -= *t;
+    *alu = 0;
     return RC_OK;
 }
 
@@ -391,6 +420,7 @@ uint8_t fnc_alu_strins(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #endif
     if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
         return RC_VAR_NOT_ALLWD;
+    FREE_ACC
 
     return RC_OK;
 }
@@ -402,6 +432,7 @@ uint8_t fnc_alu_strdel(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #endif
     if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
         return RC_VAR_NOT_ALLWD;
+    FREE_ACC
 
     return RC_OK;
 }

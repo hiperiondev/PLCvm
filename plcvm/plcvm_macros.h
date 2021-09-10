@@ -37,6 +37,8 @@
 #define VAR_TYPE(x)           ((x & 0xF800) >> 11)                             // variable type
 #define VAR_COMPLETE(type,id) ((type <<11)|(id))
 #define VTYPE(x)              TYPE_##x
+#define FREE_ACC              if (vm->hp[0].var != NULL) \
+                                  free(vm->hp[0].var);
 
 /////// internal variable types ///////
 #define TYPE_VT_BOOL    bool

@@ -135,7 +135,7 @@ enum alu_ex_2 { // can't use RSTACK
     ALU_OP_STRLFT = 0x0a, // LEFT [t: variable return: acc]
     ALU_OP_STRRGH = 0x0b, // RIGHT [t: variable return: acc]
     ALU_OP_STRMID = 0x0c, // MID [t: variable, n:pos n+1:length return: acc]
-    ALU_OP_STRCNC = 0x0d, // CONCAT [t: variable n: variable return: acc]
+    ALU_OP_STRCNC = 0x0d, // CONCAT [t: entries n+: variables return: acc]
     ALU_OP_STRINS = 0x0e, // INSERT []
     ALU_OP_STRDEL = 0x1f, // DELETE []
     // standard character string functions
