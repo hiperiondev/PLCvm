@@ -3,7 +3,7 @@ Virtual Machine for IEC 61131-3
 
 ( work in process... )
 
-Functions implemented: (completed: 69%)
+Functions implemented:
 ```diff
 +: Completed
 *: Incompleted
