@@ -650,70 +650,136 @@ uint8_t fnc_alu_bitrol(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmpand(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_CMPAND) ");
 #endif
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
+
+    uint16_t cnt;
+    for (cnt = 0; cnt < *n; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+        if (!(ANY_BIT(VAR_TYPE(type))))
+            return RC_VAR_NOT_ALLWD;
+
+        (*((TYPE_VT_ULINT*) vm->hp[*t].var)) &= (*((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+    }
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmporf(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_CMPORF) ");
 #endif
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
+
+    uint16_t cnt;
+    for (cnt = 0; cnt < *n; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+        if (!(ANY_BIT(VAR_TYPE(type))))
+            return RC_VAR_NOT_ALLWD;
+
+        (*((TYPE_VT_ULINT*) vm->hp[*t].var)) |= (*((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+    }
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmpxor(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_CMPXOR) ");
 #endif
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
+
+    uint16_t cnt;
+    for (cnt = 0; cnt < *n; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+        if (!(ANY_BIT(VAR_TYPE(type))))
+            return RC_VAR_NOT_ALLWD;
+
+        (*((TYPE_VT_ULINT*) vm->hp[*t].var)) ^= (*((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+    }
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_cmpnot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_CMPNOT) ");
 #endif
+    if (!(ANY_BIT(VAR_TYPE(*t))))
+        return RC_VAR_NOT_ALLWD;
+
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[0].var)) = ~(*((TYPE_VT_ULINT*) vm->hp[*t].var)) ;
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
-uint8_t fnc_alu_selsel(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
-#ifdef DEBUG
-    DBG_PRINT("ALU_OP_EX1_SELSEL) ");
-#endif
-    return RC_OK;
-}
-
-// TODO: implement
 uint8_t fnc_alu_selmax(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_SELMAX) ");
 #endif
+    FREE_ACC
+    vm->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
+
+    uint16_t cnt;
+    TYPE_VT_ULINT max = 0;
+    for (cnt = 0; cnt < *n; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+        if (!(ANY_BIT(VAR_TYPE(type))))
+            return RC_VAR_NOT_ALLWD;
+
+        if ((*((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var)) > max)
+            max = (*((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+    }
+    (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = max;
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
 }
 
-// TODO: implement
 uint8_t fnc_alu_selmin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_SELMIN) ");
 #endif
+    FREE_ACC vm
+    ->hp[0].var = CC_VAR(1, TYPE_VT_ULINT);
+    (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
+
+    uint16_t cnt;
+    TYPE_VT_ULINT min = *((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1]].var);
+    for (cnt = 0; cnt < *n; cnt++) {
+        uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[*t].var));
+        if (!(ANY_BIT(VAR_TYPE(type))))
+            return RC_VAR_NOT_ALLWD;
+
+        if ((*((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var)) < min)
+            min = (*((TYPE_VT_ULINT*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+    }
+    (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = min;
+    vm->hp[0].type = VT_ULINT;
+    *alu = 0;
+
     return RC_OK;
-}
-
-// TODO: implement
-uint8_t fnc_alu_sellmt(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
-#ifdef DEBUG
-    DBG_PRINT("ALU_OP_EX1_SELLMT) ");
-#endif
-    return RC_OK;
-
-
 }
 
 #endif /* PLCVM_ALU_1_H_ */

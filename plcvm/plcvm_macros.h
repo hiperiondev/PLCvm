@@ -60,6 +60,7 @@
                               )
 #define           ANY_REAL(x) ((x == VT_REAL) || (x == VT_LREAL))
 #define            ANY_BIT(x) ( \
+                                  (x == VT_BOOL)  || \
                                   (x == VT_SINT)  || \
                                   (x == VT_INT)   || \
                                   (x == VT_DINT)  || \

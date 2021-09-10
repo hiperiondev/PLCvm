@@ -111,10 +111,10 @@ enum alu_ex_1 { // can't use DSTACK
     ALU_OP_CMPXOR = 0x1a, // XOR []
     ALU_OP_CMPNOT = 0x1b, // NOT []
     // standard selection functions
-    ALU_OP_SELSEL = 0x1c, // SEL []
+    ALU_OP_EX1NOP = 0x1c, //
     ALU_OP_SELMAX = 0x1d, // MAX []
     ALU_OP_SELMIN = 0x1e, // MIN []
-    ALU_OP_SELLMT = 0x1f, // LIMIT []
+    ALU_OP_EX1_031 = 0x1f, //
 };
 
 enum alu_ex_2 { // can't use RSTACK
