@@ -41,7 +41,9 @@
 #define              VTYPE(x) TYPE_##x
 #define              FREE_ACC if (vm->hp[0].var != NULL) \
                                   free(vm->hp[0].var);
-#define       CC_VAR(n, type) (type*) calloc(n, sizeof(type))
+#define       CC_VAR(id, n, t) vm->hp[id].var = (VTYPE(t)*) calloc(n, sizeof(VTYPE(t))); \
+                                  vm->hp[id].type = t
+
 #define            ANY_NUM(x) ( \
                                   (x == VT_SINT)  || \
                                   (x == VT_INT)   || \
@@ -74,6 +76,9 @@
                                   (x == VT_DWORD) || \
                                   (x == VT_LWORD) \
                                )
+
+#define         ANY_STRING(x) (x == VT_STRING)  || \
+                              (x == VT_WSTRING)
 
 /////// internal variable types ///////
 #define TYPE_VT_BOOL    bool

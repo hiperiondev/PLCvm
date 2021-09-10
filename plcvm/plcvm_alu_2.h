@@ -61,58 +61,58 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
             switch (*n) {
                 case VT_INT: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_INT));
+                    CC_VAR(0, 1, VT_INT);
                     *((VTYPE(VT_INT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_DINT: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_DINT));
+                    CC_VAR(0, 1, VT_DINT);
                     *((VTYPE(VT_DINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_LINT: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_LINT));
+                    CC_VAR(0, 1, VT_LINT);
                     *((VTYPE(VT_LINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_BYTE: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_BYTE));
+                    CC_VAR(0, 1, VT_BYTE);
                     *((VTYPE(VT_BYTE)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_UINT:
                 case VT_WORD: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_UINT));
+                    CC_VAR(0, 1, VT_UINT);
                     *((VTYPE(VT_UINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_UDINT:
                 case VT_DWORD: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_UDINT));
+                    CC_VAR(0, 1, VT_UDINT);
                     *((VTYPE(VT_UDINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_ULINT:
                 case VT_LWORD: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_ULINT));
+                    CC_VAR(0, 1, VT_ULINT);
                     *((VTYPE(VT_ULINT)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_REAL: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_REAL));
+                    CC_VAR(0, 1, VT_REAL);
                     *((VTYPE(VT_REAL)*)vm->hp[0].var) = *t;
                     break;
                 }
 
                 case VT_LREAL: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_LREAL));
+                    CC_VAR(0, 1, VT_LREAL);
                     *((VTYPE(VT_LREAL)*)vm->hp[0].var) = *t;
                     break;
                 }
@@ -130,14 +130,14 @@ uint8_t fnc_alu_cnvtot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
                 }
 
                 case VT_STRING: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_STRING));
+                    CC_VAR(0, 1, VT_STRING);
                     ((VTYPE(VT_STRING)*)vm->hp[0].var)[0] = *(VTYPE(VT_CHAR)*)vm->hp[*t].var;
                     vm->hp[0].len = 1;
                     break;
                 }
 
                 case VT_WSTRING: {
-                    vm->hp[0].var = CC_VAR(1, VTYPE(VT_WSTRING));
+                    CC_VAR(0, 1, VT_WSTRING);
                     ((VTYPE(VT_WSTRING)*)vm->hp[0].var)[0] = *(VTYPE(VT_WCHAR)*)vm->hp[*t].var;
                     vm->hp[0].len = 1;
                     break;
@@ -291,12 +291,12 @@ uint8_t fnc_alu_strlft(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
-            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_STRING));
+            CC_VAR(0, *n, VT_STRING);
             for (cnt = 0; cnt < *n; cnt++)
                 ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
             break;
         case VT_WSTRING:
-            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_WSTRING));
+            CC_VAR(0, *n, VT_WSTRING);
             for (cnt = 0; cnt < *n; cnt++)
                 ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
             break;
@@ -318,12 +318,12 @@ uint8_t fnc_alu_strrgh(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     uint64_t cnt;
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
-            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_STRING));
+            CC_VAR(0, *n, VT_STRING);
             for (cnt = *n; cnt >= 0; cnt--)
                 ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
             break;
         case VT_WSTRING:
-            vm->hp[0].var = CC_VAR(*n, VTYPE(VT_WSTRING));
+            CC_VAR(0, *n, VT_WSTRING);
             for (cnt = *n; cnt >= 0; cnt--)
                 ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
             break;
@@ -346,12 +346,12 @@ uint8_t fnc_alu_strmid(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     uint64_t cnt;
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
-            vm->hp[0].var = CC_VAR(vm->ds[vm->dp - 2], VTYPE(VT_STRING));
+            CC_VAR(0, vm->ds[vm->dp - 2], VT_STRING);
             for (cnt = *n; cnt <= vm->ds[vm->dp - 2]; cnt++)
                 ((VTYPE(VT_STRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
             break;
         case VT_WSTRING:
-            vm->hp[0].var = CC_VAR(vm->ds[vm->dp - 2], VTYPE(VT_WSTRING));
+            CC_VAR(0, vm->ds[vm->dp - 2], VT_WSTRING);
             for (cnt = *n; cnt <= vm->ds[vm->dp - 2]; cnt++)
                 ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[cnt] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
             break;
@@ -383,7 +383,7 @@ uint8_t fnc_alu_strcnc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
-            vm->hp[0].var = CC_VAR(len, VTYPE(VT_STRING));
+            CC_VAR(0, len, VT_STRING);
             for (cnt = 0; cnt < *t; cnt++) {
                 uint16_t var = vm->ds[vm->dp - 1 - cnt];
                 for (cnt2 = pos; cnt2 < vm->hp[var].len; cnt2++) {
@@ -393,7 +393,7 @@ uint8_t fnc_alu_strcnc(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
             }
             break;
         case VT_WSTRING:
-            vm->hp[0].var = CC_VAR(len, VTYPE(VT_WSTRING));
+            CC_VAR(0, len, VT_WSTRING);
             for (cnt = 0; cnt < *t; cnt++) {
                 uint16_t var = vm->ds[vm->dp - 1 - cnt];
                 for (cnt2 = pos; cnt2 < vm->hp[var].len; cnt2++) {
@@ -417,10 +417,26 @@ uint8_t fnc_alu_strins(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX2_STRINS) ");
 #endif
-    //if (!((vm->hp[*t].type == VT_STRING) || (vm->hp[*t].type == VT_WSTRING)))
-    //    return RC_VAR_NOT_ALLWD;
-    FREE_ACC
 
+    if (!((ANY_STRING(vm->hp[*t].type) || ANY_STRING(vm->hp[*n].type)) && vm->hp[*t].type == vm->hp[*n].type))
+            return RC_VAR_NOT_ALLWD;
+
+    FREE_ACC
+    uint64_t len = vm->hp[*t].len + vm->hp[*n].len;
+
+    switch (VAR_TYPE(*t)) {
+        case VT_STRING:
+            CC_VAR(0, len, VT_STRING);
+
+            break;
+        case VT_WSTRING:
+            CC_VAR(0, len, VT_WSTRING);
+
+            break;
+    }
+
+    vm->hp[0].len = len;
+    *alu = 0;
     return RC_OK;
 }
 
