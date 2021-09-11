@@ -76,71 +76,71 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_BOOL: {
-            CC_VAR(varp, 1, VT_BOOL);
+            CC_VAR(varp, 1, VT_BOOL)
             break;
         }
 
         case VT_SINT: {
-            CC_VAR(varp, 1, VT_SINT);
+            CC_VAR(varp, 1, VT_SINT)
             break;
         }
 
         case VT_INT: {
-            CC_VAR(varp, 1, VT_INT);
+            CC_VAR(varp, 1, VT_INT)
             break;
         }
 
         case VT_DINT: {
-            CC_VAR(varp, 1, VT_DINT);
+            CC_VAR(varp, 1, VT_DINT)
             break;
         }
 
         case VT_LINT: {
-            CC_VAR(varp, 1, VT_LINT);
+            CC_VAR(varp, 1, VT_LINT)
             break;
         }
 
         case VT_USINT:
         case VT_BYTE: {
-            CC_VAR(varp, 1, VT_USINT);
+            CC_VAR(varp, 1, VT_USINT)
             break;
         }
 
         case VT_UINT:
         case VT_WORD: {
-            CC_VAR(varp, 1, VT_UINT);
+            CC_VAR(varp, 1, VT_UINT)
             break;
         }
 
         case VT_UDINT:
         case VT_DWORD: {
-            CC_VAR(varp, 1, VT_DINT);
+            CC_VAR(varp, 1, VT_DINT)
             break;
         }
 
         case VT_ULINT:
         case VT_LWORD: {
-            CC_VAR(varp, 1, VT_ULINT);
+            CC_VAR(varp, 1, VT_ULINT)
             break;
         }
 
         case VT_REAL: {
-            CC_VAR(varp, 1, VT_REAL);
+            CC_VAR(varp, 1, VT_REAL)
             break;
         }
 
         case VT_LREAL: {
-            CC_VAR(varp, 1, VT_LREAL);
+            CC_VAR(varp, 1, VT_LREAL)
             break;
         }
 
         case VT_TIME: {
-           CC_VAR(varp, 1, VT_TIME);
+           CC_VAR(varp, 1, VT_TIME)
             break;
         }
 
         case VT_DATE: {
-            CC_VAR(varp, 1, VT_DATE);
+            CC_VAR(varp, 1, VT_DATE)
             ((date_t*) vm->hp[varp].var)->date.day = 1;
             ((date_t*) vm->hp[varp].var)->date.month = 1;
             ((date_t*) vm->hp[varp].var)->date.year = 1;
@@ -148,12 +148,12 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_LDATE: {
-            CC_VAR(varp, 1, VT_LDATE);
+            CC_VAR(varp, 1, VT_LDATE)
             break;
         }
 
         case VT_TOD: {
-            CC_VAR(varp, 1, VT_TOD);
+            CC_VAR(varp, 1, VT_TOD)
             break;
         }
 
@@ -162,7 +162,7 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_DT: {
-            CC_VAR(varp, 1, VT_DT);
+            CC_VAR(varp, 1, VT_DT)
             VAR_PTR(VT_DT,varp)->dat.date.date.day = 1;
             VAR_PTR(VT_DT,varp)->dat.date.date.month = 1;
             VAR_PTR(VT_DT,varp)->dat.date.date.year = 1;
@@ -170,24 +170,24 @@ uint8_t fnc_alu_varcvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         }
 
         case VT_LDT: {
-            CC_VAR(varp, 1, VT_LDT);
+            CC_VAR(varp, 1, VT_LDT)
             break;
         }
 
         case VT_STRING: {
-            CC_VAR(varp, *n, VT_STRING);
+            CC_VAR(varp, *n, VT_STRING)
             POP(1)
             break;
         }
 
         case VT_WSTRING: {
-            CC_VAR(varp, *n, VT_WSTRING);
+            CC_VAR(varp, *n, VT_WSTRING)
             POP(1)
             break;
         }
 
         case VT_CHAR: {
-            CC_VAR(varp, 1, VT_CHAR);
+            CC_VAR(varp, 1, VT_CHAR)
             break;
         }
 
@@ -312,7 +312,7 @@ uint8_t fnc_alu_numabs(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = abs(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -326,7 +326,7 @@ uint8_t fnc_alu_numsqr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = sqrt(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -340,7 +340,7 @@ uint8_t fnc_alu_numlon(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = log(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -354,7 +354,7 @@ uint8_t fnc_alu_numlog(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = log10(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -368,7 +368,7 @@ uint8_t fnc_alu_numexp(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     if (!ANY_REAL(VAR_TYPE(*t)))
         return RC_VAR_NOT_ALLWD;
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *alu = 0;
     return RC_OK;
 }
@@ -381,7 +381,7 @@ uint8_t fnc_alu_numsin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = sin(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -395,7 +395,7 @@ uint8_t fnc_alu_numcos(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = cos(*VAR_PTR(VT_LREAL,*t));
     *((TYPE_VT_LREAL*) vm->hp[0].var) = cos(*((TYPE_VT_LREAL*) vm->hp[*t].var));
     *alu = 0;
@@ -412,7 +412,7 @@ uint8_t fnc_alu_numtan(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_EXPTN;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = tan(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -426,7 +426,7 @@ uint8_t fnc_alu_numasn(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = asin(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -440,7 +440,7 @@ uint8_t fnc_alu_numacs(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = acos(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -454,7 +454,7 @@ uint8_t fnc_alu_numatn(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = atan(*VAR_PTR(VT_LREAL,*t));
     *alu = 0;
     return RC_OK;
@@ -465,7 +465,7 @@ uint8_t fnc_alu_athadd(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_ATHADD) ");
 #endif
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = 0;
 
     uint16_t cnt;
@@ -486,7 +486,7 @@ uint8_t fnc_alu_athmul(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_ATHMUL) ");
 #endif
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = 0;
 
     uint16_t cnt;
@@ -510,7 +510,7 @@ uint8_t fnc_alu_athsub(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = *VAR_PTR(VT_LREAL,*t) - *VAR_PTR(VT_LREAL,*n);
 
     *alu = 0;
@@ -528,7 +528,7 @@ uint8_t fnc_alu_athdiv(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_EXPTN;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = *VAR_PTR(VT_LREAL,*t) / *VAR_PTR(VT_LREAL,*n);
 
     *alu = 0;
@@ -546,7 +546,7 @@ uint8_t fnc_alu_athmod(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_EXPTN;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = fmodf(*VAR_PTR(VT_LREAL,*t), *VAR_PTR(VT_LREAL,*n));
 
     *alu = 0;
@@ -562,7 +562,7 @@ uint8_t fnc_alu_athexp(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_LREAL);
+    CC_VAR(0, 1, VT_LREAL)
     *VAR_PTR(VT_LREAL,0) = pow(*VAR_PTR(VT_LREAL,*t),*VAR_PTR(VT_LREAL,*n));
 
     *alu = 0;
@@ -586,7 +586,7 @@ uint8_t fnc_alu_bitshl(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = *VAR_PTR(VT_ULINT,*t) << *VAR_PTR(VT_ULINT,*n);
 
     *alu = 0;
@@ -602,7 +602,7 @@ uint8_t fnc_alu_bitshr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = *VAR_PTR(VT_ULINT,*t) >> *VAR_PTR(VT_ULINT,*n);
 
     *alu = 0;
@@ -618,7 +618,7 @@ uint8_t fnc_alu_bitror(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = (*VAR_PTR(VT_ULINT,*t) >> *VAR_PTR(VT_ULINT,*n)) | (*VAR_PTR(VT_ULINT,*t) << (64 - *VAR_PTR(VT_ULINT,*n)));
 
     *alu = 0;
@@ -634,7 +634,7 @@ uint8_t fnc_alu_bitrol(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = (*VAR_PTR(VT_ULINT,*t) << *VAR_PTR(VT_ULINT,*n)) | (*VAR_PTR(VT_ULINT,*t) >> (64 - *VAR_PTR(VT_ULINT,*n)));
 
     *alu = 0;
@@ -647,7 +647,7 @@ uint8_t fnc_alu_cmpand(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_CMPAND) ");
 #endif
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     (*((TYPE_VT_ULINT*) vm->hp[*t].var)) = 0;
 
     uint16_t cnt;
@@ -669,7 +669,7 @@ uint8_t fnc_alu_cmporf(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_CMPORF) ");
 #endif
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = 0;
 
     uint16_t cnt;
@@ -691,7 +691,7 @@ uint8_t fnc_alu_cmpxor(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_CMPXOR) ");
 #endif
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = 0;
 
     uint16_t cnt;
@@ -716,7 +716,7 @@ uint8_t fnc_alu_cmpnot(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         return RC_VAR_NOT_ALLWD;
 
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = ~*VAR_PTR(VT_ULINT,*t);
 
     *alu = 0;
@@ -728,7 +728,7 @@ uint8_t fnc_alu_selmax(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_SELMAX) ");
 #endif
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = 0;
 
     uint16_t cnt;
@@ -753,7 +753,7 @@ uint8_t fnc_alu_selmin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     DBG_PRINT("ALU_OP_EX1_SELMIN) ");
 #endif
     FREE_ACC
-    CC_VAR(0, 1, VT_ULINT);
+    CC_VAR(0, 1, VT_ULINT)
     *VAR_PTR(VT_ULINT,0) = 0;
 
     uint16_t cnt;

@@ -46,8 +46,8 @@
 
 #define              FREE_ACC if (vm->hp[0].var != NULL) \
                                   free(vm->hp[0].var);
-#define       CC_VAR(id, n, t) vm->hp[id].var = (VTYPE(t)*) calloc(n, sizeof(VTYPE(t))); \
-                                  vm->hp[id].type = t
+#define      CC_VAR(id, n, t) vm->hp[id].var = (VTYPE(t)*) calloc(n, sizeof(VTYPE(t))); \
+                                  vm->hp[id].type = t;
 
 #define            ANY_NUM(x) ( \
                                   (x == VT_SINT)  || \
