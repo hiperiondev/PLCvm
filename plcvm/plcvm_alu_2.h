@@ -425,16 +425,25 @@ uint8_t fnc_alu_strins(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     FREE_ACC
     uint64_t len = vm->hp[*t].len + vm->hp[*n].len;
-
+    uint64_t cnt, pos = 0;
     switch (VAR_TYPE(*t)) {
         case VT_STRING:
             CC_VAR(0, len, VT_STRING);
-
-
+            for (cnt = 0; cnt < vm->ds[vm->dp - 2]; cnt++)
+                ((VTYPE(VT_STRING)*)(vm->hp[0].var))[pos++] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
+            for (cnt = 0; cnt < vm->hp[*n].len;cnt++)
+                ((VTYPE(VT_STRING)*)(vm->hp[0].var))[pos++] = ((VTYPE(VT_STRING)*)(vm->hp[*n].var))[cnt];
+            for (cnt = vm->ds[vm->dp - 2] + 1; cnt < vm->hp[*t].len - vm->ds[vm->dp - 2];cnt++)
+                 ((VTYPE(VT_STRING)*)(vm->hp[0].var))[pos++] = ((VTYPE(VT_STRING)*)(vm->hp[*t].var))[cnt];
             break;
         case VT_WSTRING:
             CC_VAR(0, len, VT_WSTRING);
-
+            for (cnt = 0; cnt < vm->ds[vm->dp - 2]; cnt++)
+                ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[pos++] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
+            for (cnt = 0; cnt < vm->hp[*n].len;cnt++)
+                ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[pos++] = ((VTYPE(VT_WSTRING)*)(vm->hp[*n].var))[cnt];
+            for (cnt = vm->ds[vm->dp - 2] + 1; cnt < vm->hp[*t].len - vm->ds[vm->dp - 2];cnt++)
+                ((VTYPE(VT_WSTRING)*)(vm->hp[0].var))[pos++] = ((VTYPE(VT_WSTRING)*)(vm->hp[*t].var))[cnt];
             break;
     }
 
