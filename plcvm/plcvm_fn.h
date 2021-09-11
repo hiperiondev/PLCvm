@@ -67,7 +67,7 @@ uint8_t (*alu_fn[])(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t 
     fnc_alu_numsqr,
     fnc_alu_numlon,
     fnc_alu_numlog,
-    fnc_alu_numexp,
+    fnc_alu_alutop,
     fnc_alu_numsin,
     fnc_alu_numcos,
     fnc_alu_numtan,

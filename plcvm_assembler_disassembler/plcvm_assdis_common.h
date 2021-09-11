@@ -143,7 +143,7 @@ const char *ALU_EX1[] = {
     EP(ALU_OP_NUMSQR),
     EP(ALU_OP_NUMLON),
     EP(ALU_OP_NUMLOG),
-    EP(ALU_OP_NUMEXP),
+    EP(ALU_OP_EX1_NOP),
     EP(ALU_OP_NUMSIN),
     EP(ALU_OP_NUMCOS),
     EP(ALU_OP_NUMTAN),

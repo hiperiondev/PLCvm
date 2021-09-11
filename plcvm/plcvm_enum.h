@@ -85,7 +85,7 @@ enum alu_ex_1 { // can't use DSTACK
     ALU_OP_NUMSQR = 0x03, // SQRT [t: variable return: acc]
     ALU_OP_NUMLON = 0x04, // LN [t: variable return: acc]
     ALU_OP_NUMLOG = 0x05, // LOG [t: variable return: acc]
-    ALU_OP_NUMEXP = 0x06, // EXP []
+    ALU_OP_EX1_NOP = 0x06, //
     ALU_OP_NUMSIN = 0x07, // SIN [t: variable return: acc]
     ALU_OP_NUMCOS = 0x08, // COS [t: variable return: acc]
     ALU_OP_NUMTAN = 0x09, // TAN [t: variable return: acc]

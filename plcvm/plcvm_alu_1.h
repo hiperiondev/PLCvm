@@ -360,19 +360,6 @@ uint8_t fnc_alu_numlog(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     return RC_OK;
 }
 
-// TODO: implement
-uint8_t fnc_alu_numexp(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
-#ifdef DEBUG
-    DBG_PRINT("ALU_OP_EX1_NUMEXP) ");
-#endif
-    if (!ANY_REAL(VAR_TYPE(*t)))
-        return RC_VAR_NOT_ALLWD;
-    FREE_ACC
-    CC_VAR(0, 1, VT_LREAL)
-    *alu = 0;
-    return RC_OK;
-}
-
 uint8_t fnc_alu_numsin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_EX1_NUMSIN) ");
