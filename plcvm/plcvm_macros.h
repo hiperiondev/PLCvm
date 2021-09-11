@@ -42,6 +42,8 @@
 #define           VAR_TYPE(x) ((x & 0xF800) >> 11)                             // variable type
 #define VAR_COMPLETE(type,id) ((type <<11)|(id))
 #define              VTYPE(x) TYPE_##x
+#define      VAR_PTR(type,id) ((VTYPE(type)*)(vm->hp[id].var))
+
 #define              FREE_ACC if (vm->hp[0].var != NULL) \
                                   free(vm->hp[0].var);
 #define       CC_VAR(id, n, t) vm->hp[id].var = (VTYPE(t)*) calloc(n, sizeof(VTYPE(t))); \
