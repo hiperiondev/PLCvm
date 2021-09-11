@@ -38,6 +38,7 @@
 #define            ALU_ARG(x) ((x & 0xFF))                                     // arguments of alu
 
 #define                POP(x) vm->dp -= x;
+#define               PICK(x) vm->ds[vm->dp - x]
 
 #define           VAR_TYPE(x) ((x & 0xF800) >> 11)                             // variable type
 #define VAR_COMPLETE(type,id) ((type <<11)|(id))

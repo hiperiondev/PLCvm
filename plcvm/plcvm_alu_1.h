@@ -248,7 +248,7 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         case VT_UDINT:
         case VT_DINT:
         case VT_DWORD: {
-            *VAR_PTR(VT_DWORD,*t) = (((VTYPE(VT_DWORD))vm->ds[vm->dp - 1] << 16) | (VTYPE(VT_DWORD))vm->ds[vm->dp - 2]);
+            *VAR_PTR(VT_DWORD,*t) = (((VTYPE(VT_DWORD))*n << 16) | (VTYPE(VT_DWORD))PICK(2));
             pop = 2;
             break;
         }
@@ -262,7 +262,7 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         case VT_LREAL:
         case VT_ULINT:
         case VT_LWORD: {
-            *VAR_PTR(VT_DWORD,*t) = (((VTYPE(VT_LWORD))vm->ds[vm->dp - 1] << 48) | ((VTYPE(VT_LWORD))vm->ds[vm->dp - 1] << 32) | ((VTYPE(VT_LWORD))vm->ds[vm->dp - 1] << 16)| (VTYPE(VT_LWORD))vm->ds[vm->dp - 1] << 4);
+            *VAR_PTR(VT_DWORD,*t) = (((VTYPE(VT_LWORD))*n << 48) | ((VTYPE(VT_LWORD))PICK(2) << 32) | ((VTYPE(VT_LWORD))PICK(3) << 16)| (VTYPE(VT_LWORD))PICK(4) << 4);
             pop = 4;
             break;
         }
@@ -273,7 +273,7 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
             uint64_t cnt;
             for (cnt = 0; cnt < *n; cnt++) {
-                VAR_PTR(VT_STRING,*t)[cnt] = vm->ds[vm->dp - 2 - cnt];
+                VAR_PTR(VT_STRING,*t)[cnt] = PICK(2 - cnt);
             }
             vm->hp[*t].len = *n;
             pop = *n + 1;
@@ -286,8 +286,8 @@ uint8_t fnc_alu_varsvr(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
             uint64_t cnt;
             for (cnt = 0; cnt < (*n * 2); cnt += 2) {
-                VAR_PTR(VT_WSTRING,*t)[cnt] = vm->ds[vm->dp - 2 - cnt];
-                VAR_PTR(VT_WSTRING,*t)[cnt + 1] = vm->ds[vm->dp - 2 - cnt + 1];
+                VAR_PTR(VT_WSTRING,*t)[cnt] = PICK(2 - cnt);
+                VAR_PTR(VT_WSTRING,*t)[cnt + 1] = PICK(2 - cnt + 1);
             }
             vm->hp[*t].len = *n;
             pop = (*n * 2) + 1;
@@ -470,10 +470,10 @@ uint8_t fnc_alu_athadd(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     uint16_t cnt;
     for (cnt = 0; cnt < *t; cnt++) {
-        uint8_t type = (*((TYPE_VT_LREAL*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+        uint8_t type = (*((TYPE_VT_LREAL*) vm->hp[PICK(1 - cnt)].var));
         if (!(ANY_NUM(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
-        *VAR_PTR(VT_LREAL,0) += *VAR_PTR(VT_LREAL,vm->ds[vm->dp - 1 - cnt]);
+        *VAR_PTR(VT_LREAL,0) += *VAR_PTR(VT_LREAL,PICK(1 - cnt));
     }
 
     POP(*t)
@@ -491,10 +491,10 @@ uint8_t fnc_alu_athmul(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
 
     uint16_t cnt;
     for (cnt = 0; cnt < *t; cnt++) {
-           uint8_t type = (*((TYPE_VT_LREAL*) vm->hp[vm->ds[vm->dp - 1 - cnt]].var));
+           uint8_t type = (*((TYPE_VT_LREAL*) vm->hp[PICK(1 - cnt)].var));
            if (!(ANY_NUM(VAR_TYPE(type))))
                return RC_VAR_NOT_ALLWD;
-           *VAR_PTR(VT_LREAL,0) *= *VAR_PTR(VT_LREAL,vm->ds[vm->dp - 1 - cnt]);
+           *VAR_PTR(VT_LREAL,0) *= *VAR_PTR(VT_LREAL,PICK(1 - cnt));
        }
 
     *alu = 0;
@@ -656,7 +656,7 @@ uint8_t fnc_alu_cmpand(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
-        *VAR_PTR(VT_ULINT,0) &= *VAR_PTR(VT_ULINT, vm->ds[vm->dp - 1 - cnt]);
+        *VAR_PTR(VT_ULINT,0) &= *VAR_PTR(VT_ULINT, PICK(1 - cnt));
     }
 
     *alu = 0;
@@ -678,7 +678,7 @@ uint8_t fnc_alu_cmporf(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
-        *VAR_PTR(VT_ULINT,0) |= *VAR_PTR(VT_ULINT,vm->ds[vm->dp - 1 - cnt]);
+        *VAR_PTR(VT_ULINT,0) |= *VAR_PTR(VT_ULINT,PICK(1 - cnt));
     }
 
     *alu = 0;
@@ -700,7 +700,7 @@ uint8_t fnc_alu_cmpxor(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
-        *VAR_PTR(VT_ULINT,0) ^= *VAR_PTR(VT_ULINT,vm->ds[vm->dp - 1 - cnt]);
+        *VAR_PTR(VT_ULINT,0) ^= *VAR_PTR(VT_ULINT,PICK(1 - cnt));
     }
 
     *alu = 0;
@@ -738,8 +738,8 @@ uint8_t fnc_alu_selmax(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
-        if (*VAR_PTR(VT_ULINT,vm->ds[vm->dp - 1 - cnt]) > max)
-            max = *VAR_PTR(VT_ULINT,vm->ds[vm->dp - 1 - cnt]);
+        if (*VAR_PTR(VT_ULINT,PICK(1 - cnt)) > max)
+            max = *VAR_PTR(VT_ULINT,PICK(1 - cnt));
     }
     *VAR_PTR(VT_ULINT,0) = max;
 
@@ -757,14 +757,14 @@ uint8_t fnc_alu_selmin(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     *VAR_PTR(VT_ULINT,0) = 0;
 
     uint16_t cnt;
-    TYPE_VT_ULINT min = *VAR_PTR(VT_ULINT,vm->ds[vm->dp - 1]);
+    TYPE_VT_ULINT min = *VAR_PTR(VT_ULINT,*n);
     for (cnt = 0; cnt < *t; cnt++) {
         uint8_t type = (*((TYPE_VT_ULINT*) vm->hp[cnt].var));
         if (!(ANY_BIT(VAR_TYPE(type))))
             return RC_VAR_NOT_ALLWD;
 
-        if (*VAR_PTR(VT_ULINT,vm->ds[vm->dp - 1 - cnt]) < min)
-            min = *VAR_PTR(VT_ULINT,vm->ds[vm->dp - 1 - cnt]);
+        if (*VAR_PTR(VT_ULINT,PICK(1 - cnt)) < min)
+            min = *VAR_PTR(VT_ULINT,PICK(1 - cnt));
     }
     *VAR_PTR(VT_ULINT,0) = min;
 

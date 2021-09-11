@@ -140,8 +140,8 @@ enum alu_ex_2 { // can't use RSTACK
     ALU_OP_STRINS = 0x0e, // INSERT []
     ALU_OP_STRDEL = 0x1f, // DELETE []
     // standard character string functions
-    ALU_OP_CHRRPL = 0x10, // REPLACE []
-    ALU_OP_CHRFND = 0x11, // FIND []
+    ALU_OP_STRRPL = 0x10, // REPLACE []
+    ALU_OP_STRFND = 0x11, // FIND []
     // functions of time data types
     ALU_OP_TIMADD = 0x12, // ADD []
     ALU_OP_TIMSUM = 0x13, // SUB []

@@ -19,7 +19,7 @@ Functions implemented:
 + NUMSQR: SQRT
 + NUMLON: LN
 + NUMLOG: LOG
-+ NUMEXP: EXP
+- NUMEXP: EXP
 + NUMSIN: SIN
 + NUMCOS: COS
 + NUMTAN: TAN
