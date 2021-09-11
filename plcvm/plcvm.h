@@ -29,10 +29,14 @@
 #include "plcvm_macros.h"
 #include "plcvm_enum.h"
 #include "plcvm_types.h"
-#include "plcvm_alu_0.h"
-#include "plcvm_alu_1.h"
-#include "plcvm_alu_2.h"
-#include "plcvm_alu_3.h"
+#include "plcvm_stdalu.h"
+#include "plcvm_bitwisebool.h"
+#include "plcvm_numeric.h"
+#include "plcvm_varendian.h"
+#include "plcvm_selcomp.h"
+#include "plcvm_string.h"
+#include "plcvm_timedate.h"
+#include "plcvm_enumerate.h"
 #include "plcvm_fn.h"
 
 /////////////////////////////////////////////////////////////////////////////////////

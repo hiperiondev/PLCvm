@@ -100,12 +100,12 @@ enum alu_ex_1 { // can't use DSTACK
     ALU_OP_ATHMOD = 0x11, // MOD [t: variable n: variable return: acc]
     ALU_OP_ATHEXP = 0x12, // EXPT [t: variable n: variable return: acc]
     ALU_OP_ATHMOV = 0x13, // MOVE []
-    // bit string functions
+    // bit functions
     ALU_OP_BITSHL = 0x14, // SHL [t: variable n: variable return: acc]
     ALU_OP_BITSHR = 0x15, // SHR [t: variable n: variable return: acc]
     ALU_OP_BITROR = 0x16, // ROR [t: variable n: variable return: acc]
     ALU_OP_BITROL = 0x17, // ROL [t: variable n: variable return: acc]
-    // selection and comparison functions
+    // boolean functions
     ALU_OP_CMPAND = 0x18, // AND [t: qty, n+:vars return: acc]
     ALU_OP_CMPORF = 0x19, // OR [t: qty, n+:vars return: acc]
     ALU_OP_CMPXOR = 0x1a, // XOR [t: qty, n+:vars return: acc]
@@ -120,8 +120,8 @@ enum alu_ex_1 { // can't use DSTACK
 
 enum alu_ex_2 { // can't use RSTACK
     // type conversion function
-    ALU_OP_CNVTOT = 0x00, // convert to type t: variable, n: target type, return: acc
-    ALU_OP_EX2NOP = 0x01, // TRUNC []
+    ALU_OP_VARTOT = 0x00, // convert to type t: variable, n: target type, return: acc
+    ALU_OP_EX2NOP = 0x01, //
     // standard selection functions
     ALU_OP_SELMUX = 0x02, // MUX [t: entries. n+: variables (n: K). return: variable selected]
     // standard comparison functions

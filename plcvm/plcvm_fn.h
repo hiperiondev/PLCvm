@@ -23,10 +23,14 @@
 #ifndef PLCVM_FN_H_
 #define PLCVM_FN_H_
 
-#include "plcvm_alu_0.h"
-#include "plcvm_alu_1.h"
-#include "plcvm_alu_2.h"
-#include "plcvm_alu_3.h"
+#include "plcvm_stdalu.h"
+#include "plcvm_bitwisebool.h"
+#include "plcvm_numeric.h"
+#include "plcvm_varendian.h"
+#include "plcvm_selcomp.h"
+#include "plcvm_string.h"
+#include "plcvm_timedate.h"
+#include "plcvm_enumerate.h"
 
 uint8_t (*alu_fn[])(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux)= {
     fnc_alu_alutop,
@@ -62,7 +66,7 @@ uint8_t (*alu_fn[])(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t 
     fnc_alu_alustr,
     fnc_alu_alubye,
 
-    fnc_alu_cnvtot,
+    fnc_alu_vartot,
     fnc_alu_numabs,
     fnc_alu_numsqr,
     fnc_alu_numlon,

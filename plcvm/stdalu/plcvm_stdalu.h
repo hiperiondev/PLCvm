@@ -1,5 +1,5 @@
 /*
- * PLCvm_alu_0.h
+ * PLCvm_stdalu.h
  *
  * Copyright 2021 Emiliano Gonzalez LU3VEA (egonzalez . hiperion @ gmail . com))
  * * Project Site: https://github.com/hiperiondev/PLCvm *
@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef PLCVM_ALU_0_H_
-#define PLCVM_ALU_0_H_
+#ifndef PLCVM_STDALU_H_
+#define PLCVM_STDALU_H_
 
 uint16_t (*ext_funcs[EXT_FUNC])(vm_t *v);
 extern uint8_t plcvm_mem_put (uint16_t addr, uint16_t value, vm_t*);
@@ -409,4 +409,4 @@ uint8_t fnc_alu_alubye(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16
     return RC_OK;
 }
 
-#endif /* PLCVM_ALU_0_H_ */
+#endif /* PLCVM_STDALU_H_ */
