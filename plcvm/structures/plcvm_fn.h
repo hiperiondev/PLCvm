@@ -33,135 +33,142 @@
 #include "plcvm_enumerate.h"
 
 uint8_t (*alu_fn[])(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux)= {
-    fnc_alu_alutop,
-    fnc_alu_aluscn,
-    fnc_alu_alutrs,
-    fnc_alu_aluget,
-    fnc_alu_aluput,
-    fnc_alu_aludpl,
-    fnc_alu_aludml,
-    fnc_alu_aluand,
-    fnc_alu_alubor,
-    fnc_alu_aluxor,
-    fnc_alu_alunot,
-    fnc_alu_aludec,
-    fnc_alu_alueq0,
-    fnc_alu_aluequ,
-    fnc_alu_aluucp,
-    fnc_alu_alucmp,
-    fnc_alu_alursh,
-    fnc_alu_alulsh,
-    fnc_alu_alugsp,
-    fnc_alu_alugrs,
-    fnc_alu_alussp,
-    fnc_alu_alusrp,
-    fnc_alu_alureg,
-    fnc_alu_alusrg,
-    fnc_alu_aluumd,
-    fnc_alu_alumod,
-    fnc_alu_alunxt,
-    fnc_alu_alugpc,
-    fnc_alu_aluexf,
-    fnc_alu_alulod,
-    fnc_alu_alustr,
-    fnc_alu_alubye,
 
-    fnc_alu_vartot,
-    fnc_alu_numabs,
-    fnc_alu_numsqr,
-    fnc_alu_numlon,
-    fnc_alu_numlog,
-    fnc_alu_alutop,
-    fnc_alu_numsin,
-    fnc_alu_numcos,
-    fnc_alu_numtan,
-    fnc_alu_numasn,
-    fnc_alu_numacs,
-    fnc_alu_numatn,
-    fnc_alu_athadd,
-    fnc_alu_athmul,
-    fnc_alu_athsub,
-    fnc_alu_athdiv,
-    fnc_alu_athmod,
-    fnc_alu_athexp,
-    fnc_alu_athmov,
-    fnc_alu_bitshl,
-    fnc_alu_bitshr,
-    fnc_alu_bitror,
-    fnc_alu_bitrol,
-    fnc_alu_cmpand,
-    fnc_alu_cmporf,
-    fnc_alu_cmpxor,
-    fnc_alu_cmpnot,
-    fnc_alu_selmax,
-    fnc_alu_selmin,
-    fnc_alu_enctbi,
-    fnc_alu_enctli,
+        // alu standard
+        fnc_alu_alutop, // NOP
+        fnc_alu_aluscn, //
+        fnc_alu_alutrs, //
+        fnc_alu_aluget, //
+        fnc_alu_aluput, //
+        fnc_alu_aludpl, //
+        fnc_alu_aludml, //
+        fnc_alu_aluand, //
+        fnc_alu_alubor, //
+        fnc_alu_aluxor, //
+        fnc_alu_alunot, //
+        fnc_alu_aludec, //
+        fnc_alu_alueq0, //
+        fnc_alu_aluequ, //
+        fnc_alu_aluucp, //
+        fnc_alu_alucmp, //
+        fnc_alu_alursh, //
+        fnc_alu_alulsh, //
+        fnc_alu_alugsp, //
+        fnc_alu_alugrs, //
+        fnc_alu_alussp, //
+        fnc_alu_alusrp, //
+        fnc_alu_alureg, //
+        fnc_alu_alusrg, //
+        fnc_alu_aluumd, //
+        fnc_alu_alumod, //
+        fnc_alu_alunxt, //
+        fnc_alu_alugpc, //
+        fnc_alu_aluexf, //
+        fnc_alu_alulod, //
+        fnc_alu_alustr, //
+        fnc_alu_alubye, //
 
-    fnc_alu_varcvr,
-    fnc_alu_varsvr,
-    fnc_alu_selmux,
-    fnc_alu_cmpgrt,
-    fnc_alu_cmpgeq,
-    fnc_alu_cmpequ,
-    fnc_alu_cmples,
-    fnc_alu_cmplth,
-    fnc_alu_cmpneq,
-    fnc_alu_strlen,
-    fnc_alu_strlft,
-    fnc_alu_strrgh,
-    fnc_alu_strmid,
-    fnc_alu_strcnc,
-    fnc_alu_strins,
-    fnc_alu_strdel,
-    fnc_alu_strrpl,
-    fnc_alu_strfnd,
-    fnc_alu_timadd,
-    fnc_alu_timsum,
-    fnc_alu_timmul,
-    fnc_alu_timdiv,
-    fnc_alu_timcnc,
-    fnc_alu_enmsel,
-    fnc_alu_enmmux,
-    fnc_alu_enmequ,
-    fnc_alu_enmneq,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
+        // alu extended 1
+        fnc_alu_cmpand, //
+        fnc_alu_cmporf, //
+        fnc_alu_cmpxor, //
+        fnc_alu_cmpnot, //
+        fnc_alu_enctbi, //
+        fnc_alu_enctli, //
+        fnc_alu_numabs, //
+        fnc_alu_numsqr, //
+        fnc_alu_numlon, //
+        fnc_alu_numlog, //
+        fnc_alu_numsin, //
+        fnc_alu_numcos, //
+        fnc_alu_numtan, //
+        fnc_alu_numasn, //
+        fnc_alu_numacs, //
+        fnc_alu_numatn, //
+        fnc_alu_athadd, //
+        fnc_alu_athmul, //
+        fnc_alu_athsub, //
+        fnc_alu_athdiv, //
+        fnc_alu_athmod, //
+        fnc_alu_athexp, //
+        fnc_alu_athmov, //
+        fnc_alu_bitshl, //
+        fnc_alu_bitshr, //
+        fnc_alu_bitror, //
+        fnc_alu_bitrol, //
+        fnc_alu_timadd, //
+        fnc_alu_timsum, //
+        fnc_alu_timmul, //
+        fnc_alu_timdiv, //
+        fnc_alu_timcnc, //
 
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
-    fnc_alu_alutop,
+        // alu extended 2
+        fnc_alu_varcvr, //
+        fnc_alu_varsvr, //
+        fnc_alu_vartot, //
+        fnc_alu_selmax, //
+        fnc_alu_selmin, //
+        fnc_alu_selmux, //
+        fnc_alu_strlen, //
+        fnc_alu_strlft, //
+        fnc_alu_strrgh, //
+        fnc_alu_strmid, //
+        fnc_alu_strcnc, //
+        fnc_alu_strins, //
+        fnc_alu_strdel, //
+        fnc_alu_strrpl, //
+        fnc_alu_strfnd, //
+        fnc_alu_enmsel, //
+        fnc_alu_enmmux, //
+        fnc_alu_enmequ, //
+        fnc_alu_enmneq, //
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+        fnc_alu_alutop,// NOP
+
+        // alu extended 3
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
+        fnc_alu_alutop, // NOP
 };
+
 #endif /* PLCVM_FN_H_ */

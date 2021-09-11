@@ -77,124 +77,119 @@ enum alu_0 {
 };
 
 enum alu_ex_1 { // can't use DSTACK
-    // variable functions
-    ALU_OP_VARCVR = 0x00, // create variable t:type, n:len (used on not fixed types ex: STRING). return t:pointer var [tttttppppppppppp]; type: [0000 0000 0prt tttt] t: type, r:retain p:persistent
-    ALU_OP_VARSVR = 0x01, // set variable t:pointer var, n[+]: depend on type
-    // standard functions of one numeric variable
-    ALU_OP_NUMABS = 0x02, // ABS [t: variable return: acc]
-    ALU_OP_NUMSQR = 0x03, // SQRT [t: variable return: acc]
-    ALU_OP_NUMLON = 0x04, // LN [t: variable return: acc]
-    ALU_OP_NUMLOG = 0x05, // LOG [t: variable return: acc]
-    ALU_OP_EX1_NOP = 0x06, //
-    ALU_OP_NUMSIN = 0x07, // SIN [t: variable return: acc]
-    ALU_OP_NUMCOS = 0x08, // COS [t: variable return: acc]
-    ALU_OP_NUMTAN = 0x09, // TAN [t: variable return: acc]
-    ALU_OP_NUMASN = 0x0a, // ASIN [t: variable return: acc]
-    ALU_OP_NUMACS = 0x0b, // ACOS [t: variable return: acc]
-    ALU_OP_NUMATN = 0x0c, // ATAN [t: variable return: acc]
-    // standard arithmetic functions
-    ALU_OP_ATHADD = 0x0d, // ADD [t: qty, n+:vars return: acc]
-    ALU_OP_ATHMUL = 0x0e, // MUL [t: qty, n+:vars return: acc]
-    ALU_OP_ATHSUB = 0x0f, // SUB [t: variable n: variable return: acc]
-    ALU_OP_ATHDIV = 0x10, // DIV [t: variable n: variable return: acc]
-    ALU_OP_ATHMOD = 0x11, // MOD [t: variable n: variable return: acc]
-    ALU_OP_ATHEXP = 0x12, // EXPT [t: variable n: variable return: acc]
-    ALU_OP_ATHMOV = 0x13, // MOVE []
-    // bit functions
-    ALU_OP_BITSHL = 0x14, // SHL [t: variable n: variable return: acc]
-    ALU_OP_BITSHR = 0x15, // SHR [t: variable n: variable return: acc]
-    ALU_OP_BITROR = 0x16, // ROR [t: variable n: variable return: acc]
-    ALU_OP_BITROL = 0x17, // ROL [t: variable n: variable return: acc]
     // boolean functions
-    ALU_OP_CMPAND = 0x18, // AND [t: qty, n+:vars return: acc]
-    ALU_OP_CMPORF = 0x19, // OR [t: qty, n+:vars return: acc]
-    ALU_OP_CMPXOR = 0x1a, // XOR [t: qty, n+:vars return: acc]
-    ALU_OP_CMPNOT = 0x1b, // NOT [t: variable return: acc]
-    // standard selection functions
-    ALU_OP_SELMAX = 0x1c, // MAX [t: qty, n+:vars return: acc]
-    ALU_OP_SELMIN = 0x1d, // MIN [t: qty, n+:vars return: acc]
+    ALU_OP_CMPAND = 0x00, // AND [t: qty, n+:vars return: acc]
+    ALU_OP_CMPORF = 0x01, // OR [t: qty, n+:vars return: acc]
+    ALU_OP_CMPXOR = 0x02, // XOR [t: qty, n+:vars return: acc]
+    ALU_OP_CMPNOT = 0x03, // NOT [t: variable return: acc]
     // endian conversion
-    ALU_OP_ENCTBI = 0x1e, // TO_BIG_ENDIAN
-    ALU_OP_ENCTLI = 0x1f, // TO_LITTLE_ENDIAN
+    ALU_OP_ENCTBI = 0x04, // TO_BIG_ENDIAN
+    ALU_OP_ENCTLI = 0x05, // TO_LITTLE_ENDIAN
+    // standard functions of one numeric variable
+    ALU_OP_NUMABS = 0x06, // ABS [t: variable return: acc]
+    ALU_OP_NUMSQR = 0x07, // SQRT [t: variable return: acc]
+    ALU_OP_NUMLON = 0x08, // LN [t: variable return: acc]
+    ALU_OP_NUMLOG = 0x09, // LOG [t: variable return: acc]
+    ALU_OP_NUMSIN = 0x0a, // SIN [t: variable return: acc]
+    ALU_OP_NUMCOS = 0x0b, // COS [t: variable return: acc]
+    ALU_OP_NUMTAN = 0x0c, // TAN [t: variable return: acc]
+    ALU_OP_NUMASN = 0x0d, // ASIN [t: variable return: acc]
+    ALU_OP_NUMACS = 0x0e, // ACOS [t: variable return: acc]
+    ALU_OP_NUMATN = 0x0f, // ATAN [t: variable return: acc]
+    // standard arithmetic functions
+    ALU_OP_ATHADD = 0x10, // ADD [t: qty, n+:vars return: acc]
+    ALU_OP_ATHMUL = 0x11, // MUL [t: qty, n+:vars return: acc]
+    ALU_OP_ATHSUB = 0x12, // SUB [t: variable n: variable return: acc]
+    ALU_OP_ATHDIV = 0x13, // DIV [t: variable n: variable return: acc]
+    ALU_OP_ATHMOD = 0x14, // MOD [t: variable n: variable return: acc]
+    ALU_OP_ATHEXP = 0x15, // EXPT [t: variable n: variable return: acc]
+    ALU_OP_ATHMOV = 0x16, // MOVE []
+    // bit functions
+    ALU_OP_BITSHL = 0x17, // SHL [t: variable n: variable return: acc]
+    ALU_OP_BITSHR = 0x18, // SHR [t: variable n: variable return: acc]
+    ALU_OP_BITROR = 0x19, // ROR [t: variable n: variable return: acc]
+    ALU_OP_BITROL = 0x1a, // ROL [t: variable n: variable return: acc]
+    // functions of time data types
+    ALU_OP_TIMADD = 0x1b, // ADD []
+    ALU_OP_TIMSUM = 0x1c, // SUB []
+    ALU_OP_TIMMUL = 0x1d, // MUL []
+    ALU_OP_TIMDIV = 0x1e, // DIV []
+    ALU_OP_TIMCNC = 0x1f, // CONCAT_DATE_TOD []
 };
 
 enum alu_ex_2 { // can't use RSTACK
-    // type conversion function
-    ALU_OP_VARTOT = 0x00, // convert to type t: variable, n: target type, return: acc
-    ALU_OP_EX2NOP = 0x01, //
+    // variable functions
+    ALU_OP_VARCVR = 0x00, // create variable t:type, n:len (used on not fixed types ex: STRING). return t:pointer var [tttttppppppppppp]; type: [0000 0000 0prt tttt] t: type, r:retain p:persistent
+    ALU_OP_VARSVR = 0x01, // set variable t:pointer var, n[+]: depend on type
+    ALU_OP_VARTOT = 0x02, // convert to type t: variable, n: target type, return: acc
     // standard selection functions
-    ALU_OP_SELMUX = 0x02, // MUX [t: entries. n+: variables (n: K). return: variable selected]
-    // standard comparison functions
-    ALU_OP_CMPGRT = 0x03, // GT [t: entries. n+: variables: return true/false]
-    ALU_OP_CMPGEQ = 0x04, // GE [t: entries. n+: variables: return true/false]
-    ALU_OP_CMPEQU = 0x05, // EQ [t: entries. n+: variables: return true/false]
-    ALU_OP_CMPLES = 0x06, // LE [t: entries. n+: variables: return true/false]
-    ALU_OP_CMPLTH = 0x07, // LT [t: entries. n+: variables: return true/false]
-    ALU_OP_CMPNEQ = 0x08, // NE [t: variable, n:variable return t != n)
+    ALU_OP_SELMAX = 0x03, // MAX [t: qty, n+:vars return: acc]
+    ALU_OP_SELMIN = 0x04, // MIN [t: qty, n+:vars return: acc]
+    ALU_OP_SELMUX = 0x05, // MUX [t: entries. n+: variables (n: K). return: variable selected]
     // character string functions
-    ALU_OP_STRLEN = 0x09, // LEN [t: variable return: acc]
-    ALU_OP_STRLFT = 0x0a, // LEFT [t: variable n: qty return: acc]
-    ALU_OP_STRRGH = 0x0b, // RIGHT [t: variable n: qty return: acc]
-    ALU_OP_STRMID = 0x0c, // MID [t: variable, n:pos n+1:length return: acc]
-    ALU_OP_STRCNC = 0x0d, // CONCAT [t: entries n+: variables return: acc]
-    ALU_OP_STRINS = 0x0e, // INSERT []
-    ALU_OP_STRDEL = 0x1f, // DELETE []
-    // standard character string functions
-    ALU_OP_STRRPL = 0x10, // REPLACE []
-    ALU_OP_STRFND = 0x11, // FIND []
-    // functions of time data types
-    ALU_OP_TIMADD = 0x12, // ADD []
-    ALU_OP_TIMSUM = 0x13, // SUB []
-    ALU_OP_TIMMUL = 0x14, // MUL []
-    ALU_OP_TIMDIV = 0x15, // DIV []
-    ALU_OP_TIMCNC = 0x16, // CONCAT_DATE_TOD []
+    ALU_OP_STRLEN = 0x06, // LEN [t: variable return: acc]
+    ALU_OP_STRLFT = 0x07, // LEFT [t: variable n: qty return: acc]
+    ALU_OP_STRRGH = 0x08, // RIGHT [t: variable n: qty return: acc]
+    ALU_OP_STRMID = 0x09, // MID [t: variable, n:pos n+1:length return: acc]
+    ALU_OP_STRCNC = 0x0a, // CONCAT [t: entries n+: variables return: acc]
+    ALU_OP_STRINS = 0x0b, // INSERT []
+    ALU_OP_STRDEL = 0x0c, // DELETE []
+    ALU_OP_STRRPL = 0x0d, // REPLACE []
+    ALU_OP_STRFND = 0x0e, // FIND []
     // functions of enumerated data types
-    ALU_OP_ENMSEL = 0x17, // SEL []
-    ALU_OP_ENMMUX = 0x18, // MUX []
-    ALU_OP_ENMEQU = 0x19, // EQ []
-    ALU_OP_ENMNEQ = 0x1a, // NE []
+    ALU_OP_ENMSEL = 0x0f, // SEL []
+    ALU_OP_ENMMUX = 0x10, // MUX []
+    ALU_OP_ENMEQU = 0x11, // EQ []
+    ALU_OP_ENMNEQ = 0x12, // NE []
     // not implemented
-    ALU_OP_EX2_027 = 0x1b, //
-    ALU_OP_EX2_028 = 0x1c, //
-    ALU_OP_EX2_029 = 0x1d, //
-    ALU_OP_EX2_030 = 0x1e, //
-    ALU_OP_EX2_031 = 0x1f, //
+    ALU_OP_02_x13 = 0x13, // not implemented
+    ALU_OP_02_x14 = 0x14, // not implemented
+    ALU_OP_02_x15 = 0x15, // not implemented
+    ALU_OP_02_x16 = 0x16, // not implemented
+    ALU_OP_02_x17 = 0x17, // not implemented
+    ALU_OP_02_x18 = 0x18, // not implemented
+    ALU_OP_02_x19 = 0x19, // not implemented
+    ALU_OP_02_x1a = 0x1a, // not implemented
+    ALU_OP_02_x1b = 0x1b, // not implemented
+    ALU_OP_02_x1c = 0x1c, // not implemented
+    ALU_OP_02_x1d = 0x1d, // not implemented
+    ALU_OP_02_x1e = 0x1e, // not implemented
+    ALU_OP_02_x1f = 0x1f, // not implemented
 };
 
 enum alu_ex_3 { // can't use  RSTACK nor DSTACK
-    // not implemented
-    ALU_OP_EX3_000 = 0x00, //
-    ALU_OP_EX3_001 = 0x01, //
-    ALU_OP_EX3_002 = 0x02, //
-    ALU_OP_EX3_003 = 0x03, //
-    ALU_OP_EX3_004 = 0x04, //
-    ALU_OP_EX3_005 = 0x05, //
-    ALU_OP_EX3_006 = 0x06, //
-    ALU_OP_EX3_007 = 0x07, //
-    ALU_OP_EX3_008 = 0x08, //
-    ALU_OP_EX3_009 = 0x09, //
-    ALU_OP_EX3_010 = 0x0a, //
-    ALU_OP_EX3_011 = 0x0b, //
-    ALU_OP_EX3_012 = 0x0c, //
-    ALU_OP_EX3_013 = 0x0d, //
-    ALU_OP_EX3_014 = 0x0e, //
-    ALU_OP_EX3_015 = 0x0f, //
-    ALU_OP_EX3_016 = 0x10, //
-    ALU_OP_EX3_017 = 0x11, //
-    ALU_OP_EX3_018 = 0x12, //
-    ALU_OP_EX3_019 = 0x13, //
-    ALU_OP_EX3_020 = 0x14, //
-    ALU_OP_EX3_021 = 0x15, //
-    ALU_OP_EX3_022 = 0x16, //
-    ALU_OP_EX3_023 = 0x17, //
-    ALU_OP_EX3_024 = 0x18, //
-    ALU_OP_EX3_025 = 0x19, //
-    ALU_OP_EX3_026 = 0x1a, //
-    ALU_OP_EX3_027 = 0x1b, //
-    ALU_OP_EX3_028 = 0x1c, //
-    ALU_OP_EX3_029 = 0x1d, //
-    ALU_OP_EX3_030 = 0x1e, //
-    ALU_OP_EX3_031 = 0x1f, //
+    ALU_OP_03_x00 = 0x00, // not implemented
+    ALU_OP_03_x01 = 0x01, // not implemented
+    ALU_OP_03_x02 = 0x02, // not implemented
+    ALU_OP_03_x03 = 0x03, // not implemented
+    ALU_OP_03_x04 = 0x04, // not implemented
+    ALU_OP_03_x05 = 0x05, // not implemented
+    ALU_OP_03_x06 = 0x06, // not implemented
+    ALU_OP_03_x07 = 0x07, // not implemented
+    ALU_OP_03_x08 = 0x08, // not implemented
+    ALU_OP_03_x09 = 0x09, // not implemented
+    ALU_OP_03_x0a = 0x0a, // not implemented
+    ALU_OP_03_x0b = 0x0b, // not implemented
+    ALU_OP_03_x0c = 0x0c, // not implemented
+    ALU_OP_03_x0d = 0x0d, // not implemented
+    ALU_OP_03_x0e = 0x0e, // not implemented
+    ALU_OP_03_x0f = 0x0f, // not implemented
+    ALU_OP_03_x10 = 0x10, // not implemented
+    ALU_OP_03_x11 = 0x11, // not implemented
+    ALU_OP_03_x12 = 0x12, // not implemented
+    ALU_OP_03_x13 = 0x13, // not implemented
+    ALU_OP_03_x14 = 0x14, // not implemented
+    ALU_OP_03_x15 = 0x15, // not implemented
+    ALU_OP_03_x16 = 0x16, // not implemented
+    ALU_OP_03_x17 = 0x17, // not implemented
+    ALU_OP_03_x18 = 0x18, // not implemented
+    ALU_OP_03_x19 = 0x19, // not implemented
+    ALU_OP_03_x1a = 0x1a, // not implemented
+    ALU_OP_03_x1b = 0x1b, // not implemented
+    ALU_OP_03_x1c = 0x1c, // not implemented
+    ALU_OP_03_x1d = 0x1d, // not implemented
+    ALU_OP_03_x1e = 0x1e, // not implemented
+    ALU_OP_03_x1f = 0x1f, // not implemented
 };
 
 // return condition
