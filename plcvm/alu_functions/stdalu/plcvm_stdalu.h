@@ -27,7 +27,6 @@ uint16_t (*ext_funcs[EXT_FUNC])(vm_t *v);
 extern uint8_t plcvm_mem_put (uint16_t addr, uint16_t value, vm_t*);
 extern uint16_t plcvm_mem_get (uint16_t addr, vm_t*);
 
-/////////////////////////////////////////////////////////////////////////////
 uint8_t fnc_alu_alutop(vm_t *vm, uint16_t word, uint16_t *t, uint16_t *n, uint16_t *r, uint16_t *alu, uint32_t *aux) {
 #ifdef DEBUG
     DBG_PRINT("ALU_OP_TOP) ");
